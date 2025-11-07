@@ -7,6 +7,22 @@
 
 import Foundation
 
-class BasePresenter: BasePresenterProtocol { }
+class BasePresenter {
+    weak var view: BaseViewController?
+    var interactor: BaseInteractor?
+    var router: BaseRouter?
+}
+
+extension BasePresenter: BasePresenterProtocol {
+    func viewDidLoad() { }
+    
+    func viewWillAppear() { }
+    
+    func viewDidAppear() { }
+    
+    func viewWillDisappear() { }
+    
+    func viewDidDisappear() { }
+}
 
 extension BasePresenter: BaseInteractorOutputProtocol { }

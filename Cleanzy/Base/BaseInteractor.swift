@@ -7,4 +7,6 @@
 
 import Foundation
 
-class BaseInteractor: BaseInteractorInputProtocol { }
+class BaseInteractor: BaseInteractorInputProtocol {
+    weak var presenter: BasePresenter?
+}
