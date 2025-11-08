@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0817FE272EBF524100247B83 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 0817FE262EBF524100247B83 /* Lottie */; };
+		0817FE2A2EBF556000247B83 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0817FE292EBF556000247B83 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0817FE272EBF524100247B83 /* Lottie in Frameworks */,
+				0817FE2A2EBF556000247B83 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = Cleanzy;
 			packageProductDependencies = (
 				0817FE262EBF524100247B83 /* Lottie */,
+				0817FE292EBF556000247B83 /* SnapKit */,
 			);
 			productName = Cleanzy;
 			productReference = 08D3DD5C2EBE265D0065AAD4 /* Cleanzy.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				0817FE252EBF524100247B83 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				0817FE282EBF556000247B83 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 08D3DD5D2EBE265D0065AAD4 /* Products */;
@@ -378,6 +382,14 @@
 				minimumVersion = 4.5.2;
 			};
 		};
+		0817FE282EBF556000247B83 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -385,6 +397,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0817FE252EBF524100247B83 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		0817FE292EBF556000247B83 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0817FE282EBF556000247B83 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

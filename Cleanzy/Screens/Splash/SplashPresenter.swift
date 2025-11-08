@@ -14,9 +14,9 @@ class SplashPresenter {
 }
 
 extension SplashPresenter: SplashPresenterProtocol {
-    
+    func viewDidLoad() {
+        router?.splashToLogin()
+    }
 }
 
-extension SplashPresenter: SplashInteractorInputProtocol {
-    
-}
+extension SplashPresenter: SplashInteractorInputProtocol { }

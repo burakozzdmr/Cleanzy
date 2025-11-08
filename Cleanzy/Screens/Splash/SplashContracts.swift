@@ -23,6 +23,7 @@ protocol SplashPresenterProtocol: BasePresenterProtocol, AnyObject {
 
 protocol SplashRouterProtocol: BaseRouterProtocol, AnyObject {
     var view: SplashViewController? { get set }
+    func splashToLogin()
 }
 
 protocol SplashBuilderProtocol: BaseBuilderProtocol, AnyObject { }

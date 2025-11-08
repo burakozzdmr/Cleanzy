@@ -11,6 +11,4 @@ class SplashInteractor {
     var presenter: SplashPresenter?
 }
 
-extension SplashInteractor: SplashInteractorInputProtocol {
-    
-}
+extension SplashInteractor: SplashInteractorInputProtocol { }
