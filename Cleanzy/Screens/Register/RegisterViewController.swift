@@ -6,10 +6,85 @@
 //
 
 import UIKit
+import SnapKit
 
 class RegisterViewController: UIViewController {
     
+    // MARK: - Properties
+    
     var presenter: RegisterPresenter!
+    
+    private let appLogoImageView: UIImageView = {
+        let imageView: UIImageView = .init()
+        imageView.image = .init(named: "appLogo")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let registerLabel: UILabel = {
+        let label: UILabel = .init()
+        label.text = "Kayıt Ol"
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 32, weight: .bold)
+        return label
+    }()
+    
+    private let userTypeSegmentedControl: UISegmentedControl = {
+        let segmentedControl: UISegmentedControl = .init(items: ["Müşteri", "Temizlikçi"])
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.backgroundColor = .white.withAlphaComponent(0.9)
+        segmentedControl.selectedSegmentTintColor = .accent
+        
+        let normalAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.black,
+            .font: UIFont.systemFont(ofSize: 16, weight: .medium)
+        ]
+        
+        let selectedAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.systemFont(ofSize: 16, weight: .semibold)
+        ]
+        
+        segmentedControl.setTitleTextAttributes(normalAttributes, for: .normal)
+        segmentedControl.setTitleTextAttributes(selectedAttributes, for: .selected)
+        return segmentedControl
+    }()
+    
+    private let nameTextField = AuthenticationTextField(
+        placeholder: "Adınız ve Soyadınız",
+        leftIcon: "person.text.rectangle"
+    )
+    
+    private let emailTextField = AuthenticationTextField(
+        placeholder: "E-postanızı giriniz",
+        leftIcon: "envelope.fill"
+    )
+    
+    private let passwordTextField = AuthenticationTextField(
+        placeholder: "Şifrenizi giriniz",
+        isSecure: true,
+        leftIcon: "lock.fill"
+    )
+    
+    private let repasswordTextField = AuthenticationTextField(
+        placeholder: "Şifrenizi tekrar giriniz",
+        isSecure: true,
+        leftIcon: "lock.fill"
+    )
+    
+    private lazy var registerButton: UIButton = {
+        let button: UIButton = .init()
+        button.setTitle("Kayıt Ol", for: .normal)
+        button.titleLabel?.textColor = .white
+        button.titleLabel?.font = .systemFont(ofSize: 24, weight: .semibold)
+        button.backgroundColor = .accent
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 12
+        button.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +97,83 @@ class RegisterViewController: UIViewController {
 
 private extension RegisterViewController {
     func setupUI() {
-        
+        addViews()
+        configureLayout()
     }
     
     func addViews() {
-        
+        view.addSubviews([
+            appLogoImageView,
+            registerLabel,
+            userTypeSegmentedControl,
+            nameTextField,
+            emailTextField,
+            passwordTextField,
+            repasswordTextField,
+            registerButton
+        ])
     }
     
     func configureLayout() {
+        appLogoImageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(128)
+        }
+        
+        registerLabel.snp.makeConstraints {
+            $0.top.equalTo(appLogoImageView.snp.bottom).offset(32)
+            $0.centerX.equalToSuperview()
+        }
+        
+        userTypeSegmentedControl.snp.makeConstraints {
+            $0.top.equalTo(registerLabel.snp.bottom).offset(32)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(320)
+            $0.height.equalTo(56)
+        }
+        
+        nameTextField.snp.makeConstraints {
+            $0.top.equalTo(userTypeSegmentedControl.snp.bottom).offset(24)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(360)
+            $0.height.equalTo(56)
+        }
+        
+        emailTextField.snp.makeConstraints {
+            $0.top.equalTo(nameTextField.snp.bottom).offset(16)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(360)
+            $0.height.equalTo(56)
+        }
+        
+        passwordTextField.snp.makeConstraints {
+            $0.top.equalTo(emailTextField.snp.bottom).offset(16)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(360)
+            $0.height.equalTo(56)
+        }
+        
+        repasswordTextField.snp.makeConstraints {
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(16)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(360)
+            $0.height.equalTo(56)
+        }
+        
+        registerButton.snp.makeConstraints {
+            $0.top.equalTo(repasswordTextField.snp.bottom).offset(64)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(320)
+            $0.height.equalTo(56)
+        }
+    }
+}
+
+// MARK: - Objective-C Methods
+
+@objc private extension RegisterViewController {
+    func registerTapped() {
         
     }
 }
@@ -37,3 +181,7 @@ private extension RegisterViewController {
 // MARK: - RegisterViewProtocol
 
 extension RegisterViewController: RegisterViewProtocol { }
+
+#Preview {
+    RegisterViewController()
+}
