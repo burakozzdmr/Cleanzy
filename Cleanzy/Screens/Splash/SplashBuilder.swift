@@ -5,4 +5,22 @@
 //  Created by Burak Özdemir on 7.11.2025.
 //
 
-import Foundation
+import UIKit
+
+class SplashBuilder: SplashBuilderProtocol {
+    static func createModule() -> UIViewController {
+        let view = SplashViewController()
+        let presenter = SplashPresenter()
+        let interactor = SplashInteractor()
+        let router = SplashRouter()
+        
+        view.presenter = presenter
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.router = router
+        interactor.presenter = presenter
+        router.view = view
+        
+        return view
+    }
+}

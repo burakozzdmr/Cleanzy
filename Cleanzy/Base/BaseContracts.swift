@@ -64,5 +64,5 @@ extension BaseRouterProtocol {
 extension BaseViewProtocol {
     func showLoading() { }
     func hideLoading() { }
-    func showErrorMessage() { }
+    func showErrorMessage(errorMessage: String) { }
 }

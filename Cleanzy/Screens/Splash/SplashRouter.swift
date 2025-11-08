@@ -5,4 +5,8 @@
 //  Created by Burak Özdemir on 8.11.2025.
 //
 
-import Foundation
+import UIKit
+
+class SplashRouter: SplashRouterProtocol {
+    var view: SplashViewController?
+}
