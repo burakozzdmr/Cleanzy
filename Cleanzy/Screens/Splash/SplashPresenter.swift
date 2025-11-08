@@ -8,7 +8,7 @@
 import Foundation
 
 class SplashPresenter {
-    var view: SplashViewController?
+    weak var view: SplashViewController?
     var interactor: SplashInteractor?
     var router: SplashRouter?
 }
@@ -19,4 +19,6 @@ extension SplashPresenter: SplashPresenterProtocol {
     }
 }
 
-extension SplashPresenter: SplashInteractorInputProtocol { }
+extension SplashPresenter: SplashInteractorOutputProtocol {
+    
+}

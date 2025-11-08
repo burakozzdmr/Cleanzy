@@ -11,7 +11,9 @@ protocol SplashViewProtocol: BaseViewProtocol, AnyObject {
     var presenter: SplashPresenter! { get set }
 }
 
-protocol SplashInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject { }
+protocol SplashInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
+    var presenter: SplashPresenter? { get set }
+}
 
 protocol SplashInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject { }
 

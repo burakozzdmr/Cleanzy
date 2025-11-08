@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  Cleanzy
 //
 //  Created by Burak Özdemir on 8.11.2025.
@@ -7,20 +7,20 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
-
-    var presenter: LoginPresenter!
+class RegisterViewController: UIViewController {
+    
+    var presenter: RegisterPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
     }
 }
 
 // MARK: - Privates
 
-private extension LoginViewController {
+private extension RegisterViewController {
     func setupUI() {
         
     }
@@ -34,6 +34,6 @@ private extension LoginViewController {
     }
 }
 
-// MARK: - LoginViewProtocol
+// MARK: - RegisterViewProtocol
 
-extension LoginViewController: LoginViewProtocol { }
+extension RegisterViewController: RegisterViewProtocol { }
