@@ -50,16 +50,23 @@ class LoginViewController: UIViewController {
         return segmentedControl
     }()
     
-    private let emailTextField = AuthenticationTextField(
-        placeholder: "E posta adresinizi girin",
-        leftIcon: "envelope.fill"
-    )
+    private lazy var emailTextField: UITextField = {
+        let textField = AuthenticationTextField(
+            placeholder: "Adınız ve Soyadınız",
+            leftIcon: "person.text.rectangle"
+        )
+        textField.delegate = self
+        return textField
+    }()
     
-    private let passwordTextField = AuthenticationTextField(
-        placeholder: "Şifrenizi girin",
-        isSecure: true,
-        leftIcon: "lock.fill"
-    )
+    private lazy var passwordTextField: UITextField = {
+        let textField = AuthenticationTextField(
+            placeholder: "Adınız ve Soyadınız",
+            leftIcon: "person.text.rectangle"
+        )
+        textField.delegate = self
+        return textField
+    }()
     
     private lazy var forgotPasswordLabel: UIButton = {
         let button: UIButton = .init()
@@ -208,6 +215,12 @@ private extension LoginViewController {
     func joinUsTapped() {
         
     }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension LoginViewController: UITextFieldDelegate {
+    
 }
 
 // MARK: - LoginViewProtocol

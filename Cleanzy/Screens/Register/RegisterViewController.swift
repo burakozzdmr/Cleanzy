@@ -50,27 +50,41 @@ class RegisterViewController: UIViewController {
         return segmentedControl
     }()
     
-    private let nameTextField = AuthenticationTextField(
-        placeholder: "Adınız ve Soyadınız",
-        leftIcon: "person.text.rectangle"
-    )
+    private lazy var nameTextField: AuthenticationTextField = {
+        let textField = AuthenticationTextField(
+            placeholder: "Adınızı ve soyadınızı girin",
+            leftIcon: "person.text.rectangle"
+        )
+        textField.delegate = self
+        return textField
+    }()
     
-    private let emailTextField = AuthenticationTextField(
-        placeholder: "E-postanızı giriniz",
-        leftIcon: "envelope.fill"
-    )
+    private lazy var emailTextField: AuthenticationTextField = {
+        let textField = AuthenticationTextField(
+            placeholder: "E-postanızı girin",
+            leftIcon: "envelope.fill"
+        )
+        textField.delegate = self
+        return textField
+    }()
     
-    private let passwordTextField = AuthenticationTextField(
-        placeholder: "Şifrenizi giriniz",
-        isSecure: true,
-        leftIcon: "lock.fill"
-    )
+    private lazy var passwordTextField: AuthenticationTextField = {
+        let textField = AuthenticationTextField(
+            placeholder: "Şifrenizi girin",
+            leftIcon: "lock.fill"
+        )
+        textField.delegate = self
+        return textField
+    }()
     
-    private let repasswordTextField = AuthenticationTextField(
-        placeholder: "Şifrenizi tekrar giriniz",
-        isSecure: true,
-        leftIcon: "lock.fill"
-    )
+    private lazy var repasswordTextField: AuthenticationTextField = {
+        let textField = AuthenticationTextField(
+            placeholder: "Şifrenizi tekrar girin",
+            leftIcon: "lock.fill"
+        )
+        textField.delegate = self
+        return textField
+    }()
     
     private lazy var registerButton: UIButton = {
         let button: UIButton = .init()
@@ -176,6 +190,12 @@ private extension RegisterViewController {
     func registerTapped() {
         
     }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension RegisterViewController: UITextFieldDelegate {
+    
 }
 
 // MARK: - RegisterViewProtocol
