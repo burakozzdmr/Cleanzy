@@ -52,8 +52,8 @@ class LoginViewController: UIViewController {
     
     private lazy var emailTextField: UITextField = {
         let textField = AuthenticationTextField(
-            placeholder: "Adınız ve Soyadınız",
-            leftIcon: "person.text.rectangle"
+            placeholder: "E-posta",
+            leftIcon: "envelope.fill"
         )
         textField.delegate = self
         return textField
@@ -61,8 +61,8 @@ class LoginViewController: UIViewController {
     
     private lazy var passwordTextField: UITextField = {
         let textField = AuthenticationTextField(
-            placeholder: "Adınız ve Soyadınız",
-            leftIcon: "person.text.rectangle"
+            placeholder: "Parola",
+            leftIcon: "lock.fill"
         )
         textField.delegate = self
         return textField
@@ -114,6 +114,8 @@ class LoginViewController: UIViewController {
         stackView.distribution = .fillProportionally
         return stackView
     }()
+    
+    private let loadingView: AuthenticationLoadingView = .init()
     
     // MARK: - Life Cycles
     
@@ -231,11 +233,14 @@ extension LoginViewController: UITextFieldDelegate {
 
 extension LoginViewController: LoginViewProtocol {
     func showLoading() {
-        // TODO: CUSTOM LOADING VIEW SHOW LOGIC
+        view.addSubview(loadingView)
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     func hideLoading() {
-        // TODO: CUSTOM LOADING VIEW HIDDEN LOGIC
+        loadingView.removeFromSuperview()
     }
     
     func showAlert() {

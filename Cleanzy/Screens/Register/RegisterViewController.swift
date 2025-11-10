@@ -98,6 +98,8 @@ class RegisterViewController: UIViewController {
         return button
     }()
     
+    private let loadingView: AuthenticationLoadingView = .init()
+    
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
@@ -206,11 +208,14 @@ extension RegisterViewController: UITextFieldDelegate {
 
 extension RegisterViewController: RegisterViewProtocol {
     func showLoading() {
-        // TODO: CUSTOM LOADING VIEW SHOW LOGIC
+        view.addSubview(loadingView)
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     func hideLoading() {
-        // TODO: CUSTOM LOADING VIEW HIDDEN LOGIC
+        loadingView.removeFromSuperview()
     }
     
     func showAlert() {

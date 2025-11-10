@@ -17,6 +17,7 @@ class RegisterPresenter {
 
 extension RegisterPresenter: RegisterPresenterProtocol {
     func didRegisterTapped(with email: String, and password: String) {
+        view?.showLoading()
         interactor?.sendRegisterRequest(with: email, and: password)
     }
 }
@@ -25,10 +26,12 @@ extension RegisterPresenter: RegisterPresenterProtocol {
 
 extension RegisterPresenter: RegisterInteractorOutputProtocol {
     func didRegisterSuccess() {
+        view?.hideLoading()
         router?.registerToPrepareContentScreen()
     }
     
     func didRegisterFailure() {
+        view?.hideLoading()
         view?.showAlert()
     }
 }

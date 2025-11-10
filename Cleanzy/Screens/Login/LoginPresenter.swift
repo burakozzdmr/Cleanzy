@@ -17,6 +17,7 @@ class LoginPresenter {
 
 extension LoginPresenter: LoginPresenterProtocol {
     func didLoginTapped(with email: String, and password: String) {
+        view?.showLoading()
         interactor?.sendLoginRequest(with: email, and: password)
     }
     
@@ -33,10 +34,12 @@ extension LoginPresenter: LoginPresenterProtocol {
 
 extension LoginPresenter: LoginInteractorOutputProtocol {
     func didLoginSuccess() {
+        view?.hideLoading()
         router?.loginToHomeScreen()
     }
     
     func didLoginFailure() {
+        view?.hideLoading()
         view?.showAlert()
     }
 }
