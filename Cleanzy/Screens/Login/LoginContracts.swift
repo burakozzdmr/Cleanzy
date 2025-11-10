@@ -13,18 +13,31 @@ protocol LoginViewProtocol: BaseViewProtocol, AnyObject {
 
 protocol LoginInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
     var presenter: LoginPresenter? { get set }
+    
+    func sendLoginRequest(with email: String, and password: String)
 }
 
-protocol LoginInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject { }
+protocol LoginInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject {
+    func didLoginSuccess()
+    func didLoginFailure()
+}
 
 protocol LoginPresenterProtocol: BasePresenterProtocol, AnyObject {
     var view: LoginViewController? { get set }
     var interactor: LoginInteractor? { get set }
     var router: LoginRouter? { get set }
+    
+    func didLoginTapped(with email: String, and password: String)
+    func didForgotPasswordTapped()
+    func didRegisterTapped()
 }
 
 protocol LoginRouterProtocol: BaseRouterProtocol, AnyObject {
     var view: LoginViewController? { get set }
+    
+    func loginToHomeScreen()
+    func loginToForgotPasswordScreen()
+    func loginToRegisterScreen()
 }
 
 protocol LoginBuilderProtocol: BaseBuilderProtocol, AnyObject { }

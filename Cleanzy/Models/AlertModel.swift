@@ -10,8 +10,5 @@ import UIKit
 struct AlertModel {
     let title: String
     let message: String
-    let prefferedStyle: UIAlertController.Style
-    let actions: [UIAlertAction]? = nil
-    let completion: (() -> Void)? = nil
-    let viewController: UIViewController
+    let actions: [UIAlertAction]
 }

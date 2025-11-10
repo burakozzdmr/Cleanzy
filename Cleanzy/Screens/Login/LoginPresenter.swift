@@ -15,8 +15,28 @@ class LoginPresenter {
 
 // MARK: - LoginPresenterProtocol
 
-extension LoginPresenter: LoginPresenterProtocol { }
+extension LoginPresenter: LoginPresenterProtocol {
+    func didLoginTapped(with email: String, and password: String) {
+        interactor?.sendLoginRequest(with: email, and: password)
+    }
+    
+    func didForgotPasswordTapped() {
+        router?.loginToForgotPasswordScreen()
+    }
+    
+    func didRegisterTapped() {
+        router?.loginToRegisterScreen()
+    }
+}
 
 // MARK: - LoginInteractorOutputProtocol
 
-extension LoginPresenter: LoginInteractorOutputProtocol { }
+extension LoginPresenter: LoginInteractorOutputProtocol {
+    func didLoginSuccess() {
+        router?.loginToHomeScreen()
+    }
+    
+    func didLoginFailure() {
+        view?.showAlert()
+    }
+}

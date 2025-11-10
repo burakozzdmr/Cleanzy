@@ -12,7 +12,7 @@ import UIKit
 protocol BaseViewProtocol: AnyObject {
     func showLoading()
     func hideLoading()
-    func showErrorMessage(errorMessage: String)
+    func showAlert()
 }
 
 protocol BaseInteractorInputProtocol: AnyObject {
@@ -33,10 +33,10 @@ protocol BasePresenterProtocol: AnyObject {
 
 protocol BaseRouterProtocol: AnyObject {
     func push(_ viewController: UIViewController, animated: Bool)
-    func pop(animated: Bool)
-    func popToRoot(animated: Bool)
+    func pop(_ viewController: UIViewController, animated: Bool)
+    func popToRoot(_ viewController: UIViewController, animated: Bool)
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
-    func dismiss(animated: Bool, completion: (() -> Void)?)
+    func dismiss(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
 }
 
 protocol BaseBuilderProtocol: AnyObject {
@@ -55,14 +55,24 @@ extension BasePresenterProtocol {
 
 extension BaseRouterProtocol {
     func push(_ viewController: UIViewController, animated: Bool) { }
-    func pop(animated: Bool) { }
-    func popToRoot(animated: Bool) { }
+    
+    func pop(_ viewController: UIViewController, animated: Bool) {
+        viewController.navigationController?.popViewController(animated: animated)
+    }
+    
+    func popToRoot(_ viewController: UIViewController, animated: Bool) {
+        viewController.navigationController?.popToRootViewController(animated: animated)
+    }
+    
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?) { }
-    func dismiss(animated: Bool, completion: (() -> Void)?) { }
+    
+    func dismiss(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
+        viewController.dismiss(animated: animated, completion: completion)
+    }
 }
 
 extension BaseViewProtocol {
     func showLoading() { }
     func hideLoading() { }
-    func showErrorMessage(errorMessage: String) { }
+    func showAlert() { }
 }

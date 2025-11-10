@@ -16,9 +16,10 @@ final class AlertManager {
 // MARK: - Publics
 
 extension AlertManager {
-    static func showAlert(with alertModel: AlertModel) {
+    func showAlert(with alertModel: AlertModel, from viewController: UIViewController) {
         let alertController = UIAlertController(title: alertModel.title, message: alertModel.message, preferredStyle: .alert)
-        alertModel.actions?.forEach { alertController.addAction($0) }
-        alertModel.viewController.present(alertController, animated: true)
+        alertModel.actions.forEach { alertController.addAction($0) }
+        
+        viewController.present(alertController, animated: true)
     }
 }

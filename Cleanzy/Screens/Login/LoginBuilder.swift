@@ -11,7 +11,7 @@ class LoginBuilder: LoginBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = LoginViewController()
         let presenter = LoginPresenter()
-        let interactor = LoginInteractor()
+        let interactor = LoginInteractor(authenticationManager: AuthenticationManager())
         let router = LoginRouter()
         
         view.presenter = presenter

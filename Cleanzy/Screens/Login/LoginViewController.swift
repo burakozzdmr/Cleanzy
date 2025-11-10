@@ -92,7 +92,7 @@ class LoginViewController: UIViewController {
     private let dontHaveAccountLabel: UILabel = {
         let label: UILabel = .init()
         label.text = "Hesabınız yok mu?"
-        label.textColor = .secondaryLabel
+        label.textColor = .black
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -130,6 +130,8 @@ private extension LoginViewController {
     func setupUI() {
         addViews()
         configureLayout()
+        
+        view.backgroundColor = .white
     }
     
     func addViews() {
@@ -205,15 +207,17 @@ private extension LoginViewController {
 
 @objc private extension LoginViewController {
     func loginTapped() {
-        
+        guard let emailText = emailTextField.text,
+              let passwordText = passwordTextField.text else { return }
+        presenter.didLoginTapped(with: emailText, and: passwordText)
     }
     
     func forgotPasswordTapped() {
-        
+        presenter.didForgotPasswordTapped()
     }
     
     func joinUsTapped() {
-        
+        presenter.didRegisterTapped()
     }
 }
 
@@ -225,7 +229,28 @@ extension LoginViewController: UITextFieldDelegate {
 
 // MARK: - LoginViewProtocol
 
-extension LoginViewController: LoginViewProtocol { }
+extension LoginViewController: LoginViewProtocol {
+    func showLoading() {
+        // TODO: CUSTOM LOADING VIEW SHOW LOGIC
+    }
+    
+    func hideLoading() {
+        // TODO: CUSTOM LOADING VIEW HIDDEN LOGIC
+    }
+    
+    func showAlert() {
+        AlertManager.shared.showAlert(
+            with: AlertModel(
+                title: "HATA",
+                message: "Kullanıcı adı veya şifre hatalı",
+                actions: [
+                    UIAlertAction(title: "Tamam", style: .default, handler: nil)
+                ]
+            ),
+            from: self
+        )
+    }
+}
 
 #Preview {
     LoginViewController()
