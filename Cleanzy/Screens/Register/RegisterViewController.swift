@@ -71,16 +71,20 @@ class RegisterViewController: UIViewController {
     private lazy var passwordTextField: AuthenticationTextField = {
         let textField = AuthenticationTextField(
             placeholder: "Şifrenizi girin",
-            leftIcon: "lock.fill"
+            isSecure: true,
+            leftIcon: "lock.fill",
+            hasPasswordToggle: true
         )
         textField.delegate = self
         return textField
     }()
     
-    private lazy var repasswordTextField: AuthenticationTextField = {
+    private lazy var confirmPasswordTextField: AuthenticationTextField = {
         let textField = AuthenticationTextField(
             placeholder: "Şifrenizi tekrar girin",
-            leftIcon: "lock.fill"
+            isSecure: true,
+            leftIcon: "lock.fill",
+            hasPasswordToggle: true
         )
         textField.delegate = self
         return textField
@@ -127,7 +131,7 @@ private extension RegisterViewController {
             nameTextField,
             emailTextField,
             passwordTextField,
-            repasswordTextField,
+            confirmPasswordTextField,
             registerButton
         ])
     }
@@ -140,51 +144,57 @@ private extension RegisterViewController {
         }
         
         registerLabel.snp.makeConstraints {
-            $0.top.equalTo(appLogoImageView.snp.bottom).offset(32)
+            $0.top.equalTo(appLogoImageView.snp.bottom).offset(24)
             $0.centerX.equalToSuperview()
         }
         
         userTypeSegmentedControl.snp.makeConstraints {
-            $0.top.equalTo(registerLabel.snp.bottom).offset(32)
+            $0.top.equalTo(registerLabel.snp.bottom).offset(24)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(320)
-            $0.height.equalTo(56)
+            $0.height.equalTo(48)
         }
         
         nameTextField.snp.makeConstraints {
-            $0.top.equalTo(userTypeSegmentedControl.snp.bottom).offset(24)
+            $0.top.equalTo(userTypeSegmentedControl.snp.bottom).offset(32)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(360)
             $0.height.equalTo(56)
         }
         
         emailTextField.snp.makeConstraints {
-            $0.top.equalTo(nameTextField.snp.bottom).offset(16)
+            $0.top.equalTo(nameTextField.snp.bottom).offset(24)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(360)
             $0.height.equalTo(56)
         }
         
         passwordTextField.snp.makeConstraints {
-            $0.top.equalTo(emailTextField.snp.bottom).offset(16)
+            $0.top.equalTo(emailTextField.snp.bottom).offset(24)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(360)
             $0.height.equalTo(56)
         }
         
-        repasswordTextField.snp.makeConstraints {
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(16)
+        confirmPasswordTextField.snp.makeConstraints {
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(24)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(360)
             $0.height.equalTo(56)
         }
         
         registerButton.snp.makeConstraints {
-            $0.top.equalTo(repasswordTextField.snp.bottom).offset(64)
+            $0.top.equalTo(confirmPasswordTextField.snp.bottom).offset(64)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(320)
             $0.height.equalTo(56)
         }
+    }
+    
+    func validatePasswords() -> Bool {
+        let password = passwordTextField.text ?? ""
+        let confirmPassword = confirmPasswordTextField.text ?? ""
+        return password == confirmPassword && !password.isEmpty
     }
 }
 
@@ -192,6 +202,20 @@ private extension RegisterViewController {
 
 @objc private extension RegisterViewController {
     func registerTapped() {
+        guard validatePasswords() else {
+            AlertManager.shared.showAlert(
+                with: AlertModel(
+                    title: "HATA",
+                    message: "Şifreler eşleşmiyor.",
+                    actions: [
+                        UIAlertAction(title: "Tamam", style: .default)
+                    ]
+                ),
+                from: self
+            )
+            return
+        }
+        
         guard let emailText = emailTextField.text,
               let passwordText = passwordTextField.text else { return }
         presenter.didRegisterTapped(with: emailText, and: passwordText)

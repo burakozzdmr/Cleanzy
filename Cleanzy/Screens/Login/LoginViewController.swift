@@ -62,7 +62,9 @@ class LoginViewController: UIViewController {
     private lazy var passwordTextField: UITextField = {
         let textField = AuthenticationTextField(
             placeholder: "Parola",
-            leftIcon: "lock.fill"
+            isSecure: true,
+            leftIcon: "lock.fill",
+            hasPasswordToggle: true
         )
         textField.delegate = self
         return textField
@@ -169,7 +171,7 @@ private extension LoginViewController {
             $0.top.equalTo(welcomeLabel.snp.bottom).offset(32)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(320)
-            $0.height.equalTo(56)
+            $0.height.equalTo(48)
         }
         
         emailTextField.snp.makeConstraints {
@@ -192,7 +194,7 @@ private extension LoginViewController {
         }
         
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(forgotPasswordLabel.snp.bottom).offset(48)
+            $0.top.equalTo(forgotPasswordLabel.snp.bottom).offset(56)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(320)
             $0.height.equalTo(56)

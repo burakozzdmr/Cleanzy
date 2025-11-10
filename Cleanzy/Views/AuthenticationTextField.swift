@@ -11,6 +11,7 @@ class AuthenticationTextField: UITextField {
     
     private var leftIconView: UIImageView?
     private var rightIconView: UIImageView?
+    private var isPasswordVisible: Bool = false
     
     // Padding değerleri
     private let leftPadding: CGFloat = 16
@@ -32,18 +33,22 @@ class AuthenticationTextField: UITextField {
         keyboardType: UIKeyboardType = .default,
         isSecure: Bool = false,
         leftIcon: String? = nil,
-        rightIcon: String? = nil
+        rightIcon: String? = nil,
+        hasPasswordToggle: Bool = false
     ) {
         self.init(frame: .zero)
-        self.placeholder = placeholder
         self.keyboardType = keyboardType
         self.isSecureTextEntry = isSecure
+        
+        setupPlaceholder(placeholder)
         
         if let leftIcon = leftIcon {
             setLeftIcon(leftIcon)
         }
         
-        if let rightIcon = rightIcon {
+        if hasPasswordToggle {
+            setupPasswordToggle()
+        } else if let rightIcon = rightIcon {
             setRightIcon(rightIcon)
         }
     }
@@ -53,7 +58,6 @@ class AuthenticationTextField: UITextField {
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         var rect = bounds
         
-        // Sol padding
         if leftView != nil {
             rect.origin.x += leftPadding + 24 + iconSpacing
             rect.size.width -= leftPadding + 24 + iconSpacing
@@ -62,7 +66,6 @@ class AuthenticationTextField: UITextField {
             rect.size.width -= leftPadding
         }
         
-        // Sağ padding
         if rightView != nil {
             rect.size.width -= rightPadding + 24 + iconSpacing
         } else {
@@ -97,7 +100,7 @@ class AuthenticationTextField: UITextField {
 
 private extension AuthenticationTextField {
     func setupTextField() {
-        backgroundColor = .white
+        backgroundColor = .clear
         layer.cornerRadius = 12
         layer.borderWidth = 1
         layer.borderColor = UIColor.lightGray.withAlphaComponent(0.3).cgColor
@@ -108,6 +111,16 @@ private extension AuthenticationTextField {
         autocapitalizationType = .none
         autocorrectionType = .no
         clearButtonMode = .whileEditing
+    }
+    
+    func setupPlaceholder(_ text: String) {
+        attributedPlaceholder = NSAttributedString(
+            string: text,
+            attributes: [
+                .foregroundColor: UIColor.lightGray,
+                .font: UIFont.systemFont(ofSize: 16)
+            ]
+        )
     }
     
     func setLeftIcon(_ iconName: String, tintColor: UIColor = .lightGray) {
@@ -134,5 +147,31 @@ private extension AuthenticationTextField {
         rightView = iconView
         rightViewMode = .always
         rightIconView = iconView
+    }
+    
+    func setupPasswordToggle() {
+        let button = UIButton(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+        button.tintColor = .lightGray
+        button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        
+        rightView = button
+        rightViewMode = .always
+    }
+    
+    @objc func togglePasswordVisibility() {
+        isPasswordVisible.toggle()
+        isSecureTextEntry = !isPasswordVisible
+        
+        guard let button = rightView as? UIButton else { return }
+        
+        let iconName = isPasswordVisible ? "eye.fill" : "eye.slash.fill"
+        button.setImage(UIImage(systemName: iconName), for: .normal)
+        
+        if let existingText = text, isSecureTextEntry {
+            deleteBackward()
+            insertText(existingText)
+        }
     }
 }
