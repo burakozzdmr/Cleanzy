@@ -113,6 +113,8 @@ private extension RegisterViewController {
     func setupUI() {
         addViews()
         configureLayout()
+        
+        view.backgroundColor = .white
     }
     
     func addViews() {
@@ -188,7 +190,9 @@ private extension RegisterViewController {
 
 @objc private extension RegisterViewController {
     func registerTapped() {
-        
+        guard let emailText = emailTextField.text,
+              let passwordText = passwordTextField.text else { return }
+        presenter.didRegisterTapped(with: emailText, and: passwordText)
     }
 }
 
@@ -200,7 +204,28 @@ extension RegisterViewController: UITextFieldDelegate {
 
 // MARK: - RegisterViewProtocol
 
-extension RegisterViewController: RegisterViewProtocol { }
+extension RegisterViewController: RegisterViewProtocol {
+    func showLoading() {
+        // TODO: CUSTOM LOADING VIEW SHOW LOGIC
+    }
+    
+    func hideLoading() {
+        // TODO: CUSTOM LOADING VIEW HIDDEN LOGIC
+    }
+    
+    func showAlert() {
+        AlertManager.shared.showAlert(
+            with: AlertModel(
+                title: "HATA",
+                message: "Kayıt işlemi başarısız",
+                actions: [
+                    UIAlertAction(title: "Tamam", style: .default)
+                ]
+            ),
+            from: self
+        )
+    }
+}
 
 #Preview {
     RegisterViewController()

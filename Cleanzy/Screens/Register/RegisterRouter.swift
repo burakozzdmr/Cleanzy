@@ -13,4 +13,8 @@ class RegisterRouter {
 
 // MARK: - RegisterRouterProtocol
 
-extension RegisterRouter: RegisterRouterProtocol { }
+extension RegisterRouter: RegisterRouterProtocol {
+    func registerToPrepareContentScreen() {
+        // TODO: REGISTER TO PREPARE CONTENT SCREEN TRANSITION LOGIC
+    }
+}

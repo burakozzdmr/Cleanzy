@@ -15,8 +15,20 @@ class RegisterPresenter {
 
 // MARK: - RegisterPresenterProtocol
 
-extension RegisterPresenter: RegisterPresenterProtocol { }
+extension RegisterPresenter: RegisterPresenterProtocol {
+    func didRegisterTapped(with email: String, and password: String) {
+        interactor?.sendRegisterRequest(with: email, and: password)
+    }
+}
 
 // MARK: - RegisterInteractorOutputProtocol
 
-extension RegisterPresenter: RegisterInteractorOutputProtocol { }
+extension RegisterPresenter: RegisterInteractorOutputProtocol {
+    func didRegisterSuccess() {
+        router?.registerToPrepareContentScreen()
+    }
+    
+    func didRegisterFailure() {
+        view?.showAlert()
+    }
+}

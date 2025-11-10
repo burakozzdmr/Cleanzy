@@ -27,12 +27,12 @@ extension LoginInteractor: LoginInteractorInputProtocol {
             .sink { [weak self] completion in
                 switch completion {
                 case .finished:
-                    print("Sign In process is successfully completed")
+                    self?.presenter?.didLoginSuccess()
                 case .failure:
                     self?.presenter?.didLoginFailure()
                 }
-            } receiveValue: { [weak self] _ in
-                self?.presenter?.didLoginSuccess()
+            } receiveValue: { authData in
+                print("USER DATA -> \(authData)")
             }
             .store(in: &cancellables)
     }
