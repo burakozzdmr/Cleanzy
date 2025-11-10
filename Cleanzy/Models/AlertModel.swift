@@ -1,0 +1,15 @@
+//
+//  AlertModel.swift
+//  Cleanzy
+//
+//  Created by Burak Özdemir on 10.11.2025.
+//
+
+import UIKit
+
+struct AlertModel {
+    let title: String
+    let message: String
+    let prefferedStyle: UIAlertController.Style
+    let actions: [UIAlertAction]? = nil
+}
