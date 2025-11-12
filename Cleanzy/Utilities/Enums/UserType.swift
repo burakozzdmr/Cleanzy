@@ -10,13 +10,4 @@ import Foundation
 enum UserType: Int, Codable {
     case customer
     case cleaner
-    
-    init(for userTypeIndex: Int) {
-        switch userTypeIndex {
-        case 0:
-            self = .customer
-        default:
-            self = .cleaner
-        }
-    }
 }

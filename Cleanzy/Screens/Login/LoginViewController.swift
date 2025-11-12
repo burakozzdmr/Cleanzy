@@ -213,7 +213,7 @@ private extension LoginViewController {
     func loginTapped() {
         guard let emailText = emailTextField.text,
               let passwordText = passwordTextField.text else { return }
-        presenter.didLoginTapped(with: emailText, and: passwordText)
+        presenter.didLoginTapped(with: emailText, and: passwordText, as: userTypeSegmentedControl.selectedSegmentIndex)
     }
     
     func forgotPasswordTapped() {

@@ -16,9 +16,9 @@ class LoginPresenter {
 // MARK: - LoginPresenterProtocol
 
 extension LoginPresenter: LoginPresenterProtocol {
-    func didLoginTapped(with email: String, and password: String) {
+    func didLoginTapped(with email: String, and password: String, as userTypeIndex: Int) {
         view?.showLoading()
-        interactor?.sendLoginRequest(with: email, and: password)
+        interactor?.sendLoginRequest(with: email, and: password, as: userTypeIndex)
     }
     
     func didForgotPasswordTapped() {

@@ -14,7 +14,7 @@ protocol LoginViewProtocol: BaseViewProtocol, AnyObject {
 protocol LoginInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
     var presenter: LoginPresenter? { get set }
     
-    func sendLoginRequest(with email: String, and password: String)
+    func sendLoginRequest(with email: String, and password: String, as userTypeIndex: Int)
 }
 
 protocol LoginInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject {
@@ -27,7 +27,7 @@ protocol LoginPresenterProtocol: BasePresenterProtocol, AnyObject {
     var interactor: LoginInteractor? { get set }
     var router: LoginRouter? { get set }
     
-    func didLoginTapped(with email: String, and password: String)
+    func didLoginTapped(with email: String, and password: String, as userTypeIndex: Int)
     func didForgotPasswordTapped()
     func didRegisterTapped()
 }

@@ -21,8 +21,8 @@ class LoginInteractor {
 // MARK: - LoginInteractorInputProtocol
 
 extension LoginInteractor: LoginInteractorInputProtocol {
-    func sendLoginRequest(with email: String, and password: String) {
-        authenticationManager.signIn(with: email, and: password)
+    func sendLoginRequest(with email: String, and password: String, as userTypeIndex: Int) {
+        authenticationManager.signIn(with: email, and: password, as: userTypeIndex)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {

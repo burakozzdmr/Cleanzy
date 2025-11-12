@@ -218,7 +218,7 @@ private extension RegisterViewController {
         
         guard let emailText = emailTextField.text,
               let passwordText = passwordTextField.text else { return }
-        presenter.didRegisterTapped(with: emailText, and: passwordText)
+        presenter.didRegisterTapped(with: emailText, and: passwordText, as: userTypeSegmentedControl.selectedSegmentIndex)
     }
 }
 

@@ -21,8 +21,8 @@ class RegisterInteractor {
 // MARK: - RegisterInteractorInputProtocol
 
 extension RegisterInteractor: RegisterInteractorInputProtocol {
-    func sendRegisterRequest(with email: String, and password: String) {
-        authenticationManager.signUp(with: email, and: password)
+    func sendRegisterRequest(with email: String, and password: String, as userTypeIndex: Int) {
+        authenticationManager.signUp(with: email, and: password, as: userTypeIndex)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
