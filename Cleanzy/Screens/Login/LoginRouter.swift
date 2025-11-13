@@ -19,7 +19,7 @@ extension LoginRouter: LoginRouterProtocol {
     }
     
     func loginToForgotPasswordScreen() {
-        // TODO: LOGIN TO FORGOT PASSWORD SCREEN TRANSITION LOGIC
+        view?.navigationController?.pushViewController(ForgotPasswordBuilder.createModule(), animated: true)
     }
     
     func loginToRegisterScreen() {

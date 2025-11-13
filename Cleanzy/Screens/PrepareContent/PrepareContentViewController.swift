@@ -49,7 +49,7 @@ class PrepareContentViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        presenter.viewDidLoad()
+        
     }
 }
 
@@ -73,17 +73,18 @@ private extension PrepareContentViewController {
     
     func configureLayout() {
         prepareContentAnimationView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.top.equalToSuperview().offset(128)
+            $0.centerX.equalToSuperview()
             $0.width.height.equalTo(256)
         }
         
         loadingLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(64)
-            $0.leading.trailing.equalToSuperview().inset(32)
+            $0.top.equalTo(prepareContentAnimationView.snp.bottom).offset(32)
+            $0.leading.trailing.equalToSuperview()
         }
         
         loadingProgressView.snp.makeConstraints {
-            $0.top.equalTo(loadingLabel.snp.bottom).offset(24)
+            $0.top.equalTo(loadingLabel.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(32)
             $0.height.equalTo(8)
         }
@@ -96,4 +97,8 @@ extension PrepareContentViewController: PrepareContentViewProtocol {
     func updateProgress(_ progress: Float) {
         loadingProgressView.setProgress(progress, animated: true)
     }
+}
+
+#Preview {
+    PrepareContentViewController()
 }

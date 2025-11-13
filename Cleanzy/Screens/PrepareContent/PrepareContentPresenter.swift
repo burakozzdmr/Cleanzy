@@ -21,7 +21,7 @@ class PrepareContentPresenter {
 
 extension PrepareContentPresenter: PrepareContentPresenterProtocol {
     func viewDidLoad() {
-        startProgressAnimation()
+        didFinishPreparedContent()
     }
     
     func didFinishPreparedContent() {
