@@ -7,7 +7,9 @@
 
 import Foundation
 
-protocol PrepareContentViewProtocol: BaseViewProtocol, AnyObject { }
+protocol PrepareContentViewProtocol: BaseViewProtocol, AnyObject {
+    func updateProgress(_ progress: Float)
+}
 
 protocol PrepareContentInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject { }
 
@@ -22,4 +24,3 @@ protocol PrepareContentRouterProtocol: BaseRouterProtocol, AnyObject {
 }
 
 protocol PrepareContentBuilderProtocol: BaseBuilderProtocol, AnyObject { }
-

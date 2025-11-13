@@ -5,7 +5,7 @@
 //  Created by Burak Özdemir on 8.11.2025.
 //
 
-import Foundation
+import UIKit
 
 class RegisterRouter {
     weak var view: RegisterViewController?
@@ -15,6 +15,6 @@ class RegisterRouter {
 
 extension RegisterRouter: RegisterRouterProtocol {
     func registerToPrepareContentScreen() {
-        // TODO: REGISTER TO PREPARE CONTENT SCREEN TRANSITION LOGIC
+        view?.navigationController?.pushViewController(PrepareContentBuilder.createModule(), animated: true)
     }
 }

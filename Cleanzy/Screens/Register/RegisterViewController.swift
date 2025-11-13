@@ -184,7 +184,7 @@ private extension RegisterViewController {
         }
         
         registerButton.snp.makeConstraints {
-            $0.top.equalTo(confirmPasswordTextField.snp.bottom).offset(64)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(48)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(320)
             $0.height.equalTo(56)
