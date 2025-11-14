@@ -249,10 +249,7 @@ extension LoginViewController: LoginViewProtocol {
         AlertManager.shared.showAlert(
             with: AlertModel(
                 title: "HATA",
-                message: "Kullanıcı adı veya şifre hatalı",
-                actions: [
-                    UIAlertAction(title: "Tamam", style: .default, handler: nil)
-                ]
+                message: "Kullanıcı adı veya şifre hatalı"
             ),
             from: self
         )

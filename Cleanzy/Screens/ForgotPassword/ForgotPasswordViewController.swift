@@ -11,20 +11,20 @@ import UIKit
 class ForgotPasswordViewController: UIViewController {
     
     // MARK: - Properties
-
+    
     var presenter: ForgotPasswordPresenter!
     
     private let codeDescriptionLabel: UILabel = {
         let label: UILabel = .init()
-        label.text = "Şifre sıfırlama bağlantısını size iletebilmemiz için e-posta veya telefon numaranıza ihtiyacımız var."
+        label.text = "Şifre sıfırlama bağlantısını size iletebilmemiz için e-posta adresinize ihtiyacımız var."
         label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.numberOfLines = 0
         return label
     }()
     
-    private lazy var codeTextField: AuthenticationTextField = {
-        let textField: AuthenticationTextField = .init(placeholder: "E-posta veya telefon numarası", keyboardType: .default, leftIcon: "at")
+    private lazy var emailTextField: AuthenticationTextField = {
+        let textField: AuthenticationTextField = .init(placeholder: "ornek@gmail.com", keyboardType: .default, leftIcon: "at")
         textField.delegate = self
         return textField
     }()
@@ -37,9 +37,11 @@ class ForgotPasswordViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.clipsToBounds = true
         button.layer.cornerRadius = 16
-        button.addTarget(self, action: #selector(sendCodeTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(sendResetPasswordLinkTapped), for: .touchUpInside)
         return button
     }()
+    
+    private let loadingView: AuthenticationLoadingView = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +64,7 @@ private extension ForgotPasswordViewController {
     func addViews() {
         view.addSubviews([
             codeDescriptionLabel,
-            codeTextField,
+            emailTextField,
             sendCodeButton
         ])
     }
@@ -73,7 +75,7 @@ private extension ForgotPasswordViewController {
             $0.leading.trailing.equalToSuperview().inset(32)
         }
         
-        codeTextField.snp.makeConstraints {
+        emailTextField.snp.makeConstraints {
             $0.top.equalTo(codeDescriptionLabel.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.width.equalTo(400)
@@ -92,15 +94,58 @@ private extension ForgotPasswordViewController {
 // MARK: - Objective-C Methods
 
 @objc private extension ForgotPasswordViewController {
-    func sendCodeTapped() {
+    func sendResetPasswordLinkTapped() {
+        let emailText = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
+        if emailText.isEmpty {
+            AlertManager.shared.showAlert(
+                with: .init(
+                    title: "HATA",
+                    message: "Lütfen geçerli bir e-posta adresi giriniz.",
+                ),
+                from: self
+            )
+            return
+            
+        } else if !(emailText.contains("@") && emailText.contains(".com")) {
+            AlertManager.shared.showAlert(
+                with: .init(
+                    title: "UYARI",
+                    message: "E-Posta adresiniz uygun formatta değil"
+                ),
+                from: self
+            )
+            return
+            
+        } else {
+            presenter.didSendPasswordLinkTapped(with: emailText)
+        }
     }
 }
 
 // MARK: - ForgotPasswordViewProtocol
 
 extension ForgotPasswordViewController: ForgotPasswordViewProtocol {
+    func showLoading() {
+        view.addSubview(loadingView)
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
     
+    func hideLoading() {
+        loadingView.removeFromSuperview()
+    }
+    
+    func showAlert(with errorMessage: String) {
+        AlertManager.shared.showAlert(
+            with: .init(
+                title: "HATA",
+                message: errorMessage
+            ),
+            from: self
+        )
+    }
 }
 
 // MARK: - UITextFieldDelegate

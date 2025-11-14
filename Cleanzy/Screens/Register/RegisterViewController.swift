@@ -206,10 +206,7 @@ private extension RegisterViewController {
             AlertManager.shared.showAlert(
                 with: AlertModel(
                     title: "HATA",
-                    message: "Şifreler eşleşmiyor.",
-                    actions: [
-                        UIAlertAction(title: "Tamam", style: .default)
-                    ]
+                    message: "Şifreler eşleşmiyor."
                 ),
                 from: self
             )

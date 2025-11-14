@@ -14,12 +14,19 @@ class ForgotPasswordPresenter {
 }
 
 extension ForgotPasswordPresenter: ForgotPasswordPresenterProtocol {
-    func viewDidLoad() {
-        didSendCodeSuccessfully()
+    func didSendPasswordLinkTapped(with email: String) {
+        view?.showLoading()
+        interactor?.sendCodeRequest(for: email)
     }
     
-    func didSendCodeSuccessfully() {
-        interactor?.sendCodeRequest()
+    func didSendPasswordSuccess() {
+        view?.hideLoading()
+        router?.forgotPasswordToSendCodeScreen()
+    }
+    
+    func didSendPasswordFailure(with errorMessage: String) {
+        view?.hideLoading()
+        view?.showAlert(with: errorMessage)
     }
 }
 

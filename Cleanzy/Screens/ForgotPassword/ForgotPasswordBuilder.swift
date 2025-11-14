@@ -10,7 +10,7 @@ import UIKit
 class ForgotPasswordBuilder: ForgotPasswordBuilderProtocol {
     static func createModule() -> UIViewController {
         let viewController = ForgotPasswordViewController()
-        let interactor = ForgotPasswordInteractor()
+        let interactor = ForgotPasswordInteractor(authenticationManager: AuthenticationManager())
         let presenter = ForgotPasswordPresenter()
         let router = ForgotPasswordRouter()
         

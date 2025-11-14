@@ -14,7 +14,7 @@ protocol ForgotPasswordViewProtocol: BaseViewProtocol, AnyObject {
 protocol ForgotPasswordInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
     var presenter: ForgotPasswordPresenter? { get set }
     
-    func sendCodeRequest()
+    func sendCodeRequest(for emailText: String)
 }
 
 protocol ForgotPasswordInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject { }
@@ -24,7 +24,9 @@ protocol ForgotPasswordPresenterProtocol: BasePresenterProtocol, AnyObject {
     var interactor: ForgotPasswordInteractor? { get set }
     var router: ForgotPasswordRouter? { get set }
     
-    func didSendCodeSuccessfully()
+    func didSendPasswordLinkTapped(with email: String)
+    func didSendPasswordSuccess()
+    func didSendPasswordFailure(with errorMessage: String)
 }
 
 protocol ForgotPasswordRouterProtocol: BaseRouterProtocol, AnyObject {

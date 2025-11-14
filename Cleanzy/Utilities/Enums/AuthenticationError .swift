@@ -13,6 +13,7 @@ enum AuthenticationError: Error {
     case signInFailed
     case signUpFailed
     case signOutFailed
+    case sendResetPasswordFailed
     case userNotFound
     case userAlreadyExists
     case decodingError
@@ -31,6 +32,8 @@ enum AuthenticationError: Error {
             return "Sign up failed"
         case .signOutFailed:
             return "Sign out failed"
+        case .sendResetPasswordFailed:
+            return "Send reset password failed"
         case .userNotFound:
             return "User not found"
         case .userAlreadyExists:

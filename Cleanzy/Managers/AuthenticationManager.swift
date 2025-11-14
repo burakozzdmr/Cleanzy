@@ -15,6 +15,7 @@ protocol AuthenticationManagerProtocol: AnyObject {
     func signIn(with email: String, and password: String, as userTypeIndex: Int) -> AnyPublisher<AuthDataResult, AuthenticationError>
     func signUp(with email: String, and password: String, as userTypeIndex: Int) -> AnyPublisher<AuthDataResult, AuthenticationError>
     func signOut() -> AnyPublisher<Void, AuthenticationError>
+    func sendResetPasswordLink(with email: String) -> AnyPublisher<Void, AuthenticationError>
 }
 
 // MARK: - AuthenticationManager
@@ -103,6 +104,15 @@ extension AuthenticationManager: AuthenticationManagerProtocol {
             }
         }
         .eraseToAnyPublisher()
+    }
+    
+    func sendResetPasswordLink(with email: String) -> AnyPublisher<Void, AuthenticationError> {
+        return firebaseAuthentication
+            .sendPasswordReset(withEmail: email)
+            .mapError { _ in
+                AuthenticationError.sendResetPasswordFailed
+            }
+            .eraseToAnyPublisher()
     }
 }
 
