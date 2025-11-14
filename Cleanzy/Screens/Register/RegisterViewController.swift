@@ -119,8 +119,14 @@ private extension RegisterViewController {
     func setupUI() {
         addViews()
         configureLayout()
+        setupGestures()
         
         view.backgroundColor = .white
+    }
+    
+    func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
     
     func addViews() {
@@ -184,7 +190,7 @@ private extension RegisterViewController {
         }
         
         registerButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(48)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(24)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(320)
             $0.height.equalTo(56)
@@ -217,12 +223,19 @@ private extension RegisterViewController {
               let passwordText = passwordTextField.text else { return }
         presenter.didRegisterTapped(with: emailText, and: passwordText, as: userTypeSegmentedControl.selectedSegmentIndex)
     }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 // MARK: - UITextFieldDelegate
 
 extension RegisterViewController: UITextFieldDelegate {
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 // MARK: - RegisterViewProtocol

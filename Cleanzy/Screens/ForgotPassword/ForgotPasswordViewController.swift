@@ -56,9 +56,15 @@ private extension ForgotPasswordViewController {
     func setupUI() {
         addViews()
         configureLayout()
+        setupGestures()
         
         view.backgroundColor = .white
         navigationItem.title = "Şifremi Unuttum"
+    }
+    
+    func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
     
     func addViews() {
@@ -121,6 +127,10 @@ private extension ForgotPasswordViewController {
             presenter.didSendPasswordLinkTapped(with: emailText)
         }
     }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 // MARK: - ForgotPasswordViewProtocol
@@ -151,7 +161,10 @@ extension ForgotPasswordViewController: ForgotPasswordViewProtocol {
 // MARK: - UITextFieldDelegate
 
 extension ForgotPasswordViewController: UITextFieldDelegate {
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 #Preview {

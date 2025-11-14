@@ -134,8 +134,14 @@ private extension LoginViewController {
     func setupUI() {
         addViews()
         configureLayout()
+        setupGestures()
         
         view.backgroundColor = .white
+    }
+    
+    func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
     
     func addViews() {
@@ -223,12 +229,19 @@ private extension LoginViewController {
     func joinUsTapped() {
         presenter.didRegisterTapped()
     }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 // MARK: - UITextFieldDelegate
 
 extension LoginViewController: UITextFieldDelegate {
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 // MARK: - LoginViewProtocol
