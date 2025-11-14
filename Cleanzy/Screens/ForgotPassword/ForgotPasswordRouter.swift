@@ -5,7 +5,7 @@
 //  Created by Burak Özdemir on 13.11.2025.
 //
 
-import Foundation
+import UIKit
 
 class ForgotPasswordRouter {
     weak var view: ForgotPasswordViewController?
@@ -13,6 +13,6 @@ class ForgotPasswordRouter {
 
 extension ForgotPasswordRouter: ForgotPasswordRouterProtocol {
     func forgotPasswordToSendCodeScreen() {
-        //TODO: FORGOT PASSWORD TO SEND CODE SCREEN TRANSITION LOGIC
+        self.push(currentViewController: view ?? .init(), targetViewController: SendCodeBuilder.createModule(), animated: true)
     }
 }

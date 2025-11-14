@@ -15,6 +15,6 @@ class RegisterRouter {
 
 extension RegisterRouter: RegisterRouterProtocol {
     func registerToPrepareContentScreen() {
-        view?.navigationController?.pushViewController(PrepareContentBuilder.createModule(), animated: true)
+        self.push(currentViewController: view ?? .init(), targetViewController: PrepareContentBuilder.createModule(), animated: true)
     }
 }

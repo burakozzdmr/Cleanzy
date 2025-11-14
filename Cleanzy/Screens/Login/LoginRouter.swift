@@ -19,10 +19,10 @@ extension LoginRouter: LoginRouterProtocol {
     }
     
     func loginToForgotPasswordScreen() {
-        view?.navigationController?.pushViewController(ForgotPasswordBuilder.createModule(), animated: true)
+        self.push(currentViewController: view ?? .init(), targetViewController: ForgotPasswordBuilder.createModule(), animated: true)
     }
     
     func loginToRegisterScreen() {
-        view?.navigationController?.pushViewController(RegisterBuilder.createModule(), animated: true)
+        self.push(currentViewController: view ?? .init(), targetViewController: RegisterBuilder.createModule(), animated: true)
     }
 }

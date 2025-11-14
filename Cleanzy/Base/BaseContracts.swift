@@ -32,7 +32,7 @@ protocol BasePresenterProtocol: AnyObject {
 }
 
 protocol BaseRouterProtocol: AnyObject {
-    func push(_ viewController: UIViewController, animated: Bool)
+    func push(currentViewController: UIViewController, targetViewController: UIViewController, animated: Bool)
     func pop(_ viewController: UIViewController, animated: Bool)
     func popToRoot(_ viewController: UIViewController, animated: Bool)
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
@@ -54,7 +54,9 @@ extension BasePresenterProtocol {
 }
 
 extension BaseRouterProtocol {
-    func push(_ viewController: UIViewController, animated: Bool) { }
+    func push(currentViewController: UIViewController, targetViewController: UIViewController, animated: Bool) {
+        currentViewController.navigationController?.pushViewController(targetViewController, animated: animated)
+    }
     
     func pop(_ viewController: UIViewController, animated: Bool) {
         viewController.navigationController?.popViewController(animated: animated)
