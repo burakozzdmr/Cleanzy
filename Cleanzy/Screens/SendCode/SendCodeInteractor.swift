@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+class SendCodeInteractor {
+    weak var presenter: SendCodePresenter?
+}
+
+extension SendCodeInteractor: SendCodeInteractorInputProtocol { }

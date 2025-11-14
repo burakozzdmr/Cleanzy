@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+class SendCodePresenter {
+    weak var view: SendCodeViewController?
+    var interactor: SendCodeInteractor?
+    var router: SendCodeRouter?
+}
+
+extension SendCodePresenter: SendCodePresenterProtocol {
+    func didLoginTapped() {
+        router?.sendCodeToLoginScreen()
+    }
+}
+
+extension SendCodePresenter: SendCodeInteractorOutputProtocol { }

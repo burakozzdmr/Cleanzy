@@ -5,4 +5,22 @@
 //  Created by Burak Özdemir on 14.11.2025.
 //
 
-import Foundation
+import UIKit
+
+class SendCodeBuilder: SendCodeBuilderProtocol {
+    static func createModule() -> UIViewController {
+        let view = SendCodeViewController()
+        let interactor = SendCodeInteractor()
+        let presenter = SendCodePresenter()
+        let router = SendCodeRouter()
+        
+        view.presenter = presenter
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.router = router
+        interactor.presenter = presenter
+        router.view = view
+        
+        return view
+    }
+}
