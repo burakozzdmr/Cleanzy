@@ -9,10 +9,10 @@ import UIKit
 
 // MARK: - Protocols
 
-protocol BaseViewProtocol: AnyObject {
+protocol BaseViewProtocol: UIViewController {
     func showLoading()
     func hideLoading()
-    func showAlert()
+    func showAlert(with alertModel: AlertModel)
 }
 
 protocol BaseInteractorInputProtocol: AnyObject {
@@ -76,5 +76,5 @@ extension BaseRouterProtocol {
 extension BaseViewProtocol {
     func showLoading() { }
     func hideLoading() { }
-    func showAlert() { }
+    func showAlert(with alertModel: AlertModel) { }
 }
