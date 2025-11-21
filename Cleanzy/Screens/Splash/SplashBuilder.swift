@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class SplashBuilder: SplashBuilderProtocol {
+final class SplashBuilder { }
+
+// MARK: - SplashBuilderProtocol
+
+extension SplashBuilder: SplashBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = SplashViewController()
         let presenter = SplashPresenter()

@@ -7,9 +7,13 @@
 
 import UIKit
 
+// MARK: - SplashRouter
+
 final class SplashRouter {
     weak var presenter: SplashPresenterProtocol?
 }
+
+// MARK: - SplashRouterProtocol
 
 extension SplashRouter: SplashRouterProtocol {
     func splashToLogin() {

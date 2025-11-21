@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class LoginBuilder: LoginBuilderProtocol {
+final class LoginBuilder { }
+
+// MARK: - LoginBuilderProtocol
+
+extension LoginBuilder: LoginBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = LoginViewController()
         let presenter = LoginPresenter()

@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - LoginRouter
+
 final class LoginRouter {
     weak var presenter: LoginPresenterProtocol?
 }

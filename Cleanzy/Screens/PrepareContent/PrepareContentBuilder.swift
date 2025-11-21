@@ -7,7 +7,13 @@
 
 import UIKit
 
-final class PrepareContentBuilder: PrepareContentBuilderProtocol {
+// MARK: - PrepareContentBuilder
+
+final class PrepareContentBuilder { }
+
+// MARK: - PrepareContentBuilderProtocol
+
+extension PrepareContentBuilder: PrepareContentBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = PrepareContentViewController()
         let presenter = PrepareContentPresenter()

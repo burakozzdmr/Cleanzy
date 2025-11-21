@@ -7,9 +7,13 @@
 
 import Foundation
 
+// MARK: - PrepareContentRouter
+
 final class PrepareContentRouter {
     weak var presenter: PrepareContentPresenterProtocol?
 }
+
+// MARK: - PrepareContentRouterProtocol
 
 extension PrepareContentRouter: PrepareContentRouterProtocol {
     func prepareContentToHomeScreen() {

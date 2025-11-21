@@ -7,17 +7,23 @@
 
 import Foundation
 
+// MARK: - SplashPresenter
+
 final class SplashPresenter {
     weak var view: SplashViewProtocol?
     var interactor: SplashInteractorInputProtocol?
     var router: SplashRouterProtocol?
 }
 
+// MARK: - SplashPresenterProtocol
+
 extension SplashPresenter: SplashPresenterProtocol {
     func viewDidLoad() {
         router?.splashToLogin()
     }
 }
+
+// MARK: - SplashInteractorOutputProtocol
 
 extension SplashPresenter: SplashInteractorOutputProtocol {
     

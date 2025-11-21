@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class SendCodeBuilder: SendCodeBuilderProtocol {
+final class SendCodeBuilder { }
+
+// MARK: - SendCodeBuilderProtocol
+
+extension SendCodeBuilder: SendCodeBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = SendCodeViewController()
         let interactor = SendCodeInteractor()

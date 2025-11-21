@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - RegisterPresenter
+
 final class RegisterPresenter {
     weak var view: RegisterViewProtocol?
     var interactor: RegisterInteractorInputProtocol?

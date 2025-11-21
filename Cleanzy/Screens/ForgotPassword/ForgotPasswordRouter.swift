@@ -7,9 +7,13 @@
 
 import UIKit
 
+// MARK: - ForgotPasswordRouter
+
 final class ForgotPasswordRouter {
     weak var presenter: ForgotPasswordPresenterProtocol?
 }
+
+// MARK: - ForgotPasswordRouterProtocol
 
 extension ForgotPasswordRouter: ForgotPasswordRouterProtocol {
     func forgotPasswordToSendCodeScreen() {

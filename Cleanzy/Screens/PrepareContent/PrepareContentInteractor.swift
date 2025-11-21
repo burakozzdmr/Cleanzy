@@ -7,9 +7,13 @@
 
 import Foundation
 
+// MARK: - PrepareContentInteractor
+
 final class PrepareContentInteractor {
     weak var presenter: PrepareContentInteractorOutputProtocol?
 }
+
+// MARK: - PrepareContentInteractorInputProtocol
 
 extension PrepareContentInteractor: PrepareContentInteractorInputProtocol { }
 

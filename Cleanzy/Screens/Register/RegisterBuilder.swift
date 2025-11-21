@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class RegisterBuilder: RegisterBuilderProtocol {
+final class RegisterBuilder { }
+
+// MARK: - RegisterBuilderProtocol
+
+extension RegisterBuilder: RegisterBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = RegisterViewController()
         let presenter = RegisterPresenter()

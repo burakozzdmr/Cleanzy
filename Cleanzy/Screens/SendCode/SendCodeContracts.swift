@@ -7,15 +7,23 @@
 
 import Foundation
 
+// MARK: - SendCodeViewProtocol
+
 protocol SendCodeViewProtocol: BaseViewProtocol, AnyObject {
     var presenter: SendCodePresenterProtocol! { get set }
 }
+
+// MARK: - SendCodeInteractorInputProtocol
 
 protocol SendCodeInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
     var presenter: SendCodeInteractorOutputProtocol? { get set }
 }
 
+// MARK: - SendCodeInteractorOutputProtocol
+
 protocol SendCodeInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject { }
+
+// MARK: - SendCodePresenterProtocol
 
 protocol SendCodePresenterProtocol: BasePresenterProtocol, AnyObject {
     var view: SendCodeViewProtocol? { get set }
@@ -25,10 +33,14 @@ protocol SendCodePresenterProtocol: BasePresenterProtocol, AnyObject {
     func didLoginTapped()
 }
 
+// MARK: - SendCodeRouterProtocol
+
 protocol SendCodeRouterProtocol: BaseRouterProtocol, AnyObject {
     var presenter: SendCodePresenterProtocol? { get set }
     
     func sendCodeToLoginScreen()
 }
+
+// MARK: - SendCodeBuilderProtocol
 
 protocol SendCodeBuilderProtocol: BaseBuilderProtocol, AnyObject { }

@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - RegisterRouter
+
 final class RegisterRouter {
     weak var presenter: RegisterPresenterProtocol?
 }

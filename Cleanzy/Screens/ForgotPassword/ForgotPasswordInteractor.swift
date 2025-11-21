@@ -8,6 +8,8 @@
 import Combine
 import Foundation
 
+// MARK: - ForgotPasswordInteractor
+
 final class ForgotPasswordInteractor {
     weak var presenter: ForgotPasswordInteractorOutputProtocol?
     private let authenticationManager: AuthenticationManagerProtocol
@@ -17,6 +19,8 @@ final class ForgotPasswordInteractor {
         self.authenticationManager = authenticationManager
     }
 }
+
+// MARK: - ForgotPasswordInteractorInputProtocol
 
 extension ForgotPasswordInteractor: ForgotPasswordInteractorInputProtocol {
     func sendCodeRequest(for emailText: String) {

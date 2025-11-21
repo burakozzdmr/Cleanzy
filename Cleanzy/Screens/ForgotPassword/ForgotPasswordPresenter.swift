@@ -7,11 +7,15 @@
 
 import Foundation
 
+// MARK: - ForgotPasswordPresenter
+
 final class ForgotPasswordPresenter {
     weak var view: ForgotPasswordViewProtocol?
     var interactor: ForgotPasswordInteractorInputProtocol?
     var router: ForgotPasswordRouterProtocol?
 }
+
+// MARK: - ForgotPasswordPresenterProtocol
 
 extension ForgotPasswordPresenter: ForgotPasswordPresenterProtocol {
     func didSendPasswordLinkTapped(with email: String) {
@@ -34,5 +38,7 @@ extension ForgotPasswordPresenter: ForgotPasswordPresenterProtocol {
         )
     }
 }
+
+// MARK: - ForgotPasswordInteractorOutputProtocol
 
 extension ForgotPasswordPresenter: ForgotPasswordInteractorOutputProtocol { }

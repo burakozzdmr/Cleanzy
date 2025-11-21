@@ -7,9 +7,13 @@
 
 import Foundation
 
+// MARK: - RegisterViewProtocol
+
 protocol RegisterViewProtocol: BaseViewProtocol, AnyObject {
     var presenter: RegisterPresenterProtocol! { get set }
 }
+
+// MARK: - RegisterInteractorInputProtocol
 
 protocol RegisterInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
     var presenter: RegisterInteractorOutputProtocol? { get set }
@@ -17,10 +21,14 @@ protocol RegisterInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject
     func sendRegisterRequest(with email: String, and password: String, as userTypeIndex: Int)
 }
 
+// MARK: - RegisterInteractorOutputProtocol
+
 protocol RegisterInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject {
     func didRegisterSuccess()
     func didRegisterFailure()
 }
+
+// MARK: - RegisterPresenterProtocol
 
 protocol RegisterPresenterProtocol: BasePresenterProtocol, AnyObject {
     var view: RegisterViewProtocol? { get set }
@@ -30,10 +38,14 @@ protocol RegisterPresenterProtocol: BasePresenterProtocol, AnyObject {
     func didRegisterTapped(with email: String, and password: String, as userTypeIndex: Int)
 }
 
+// MARK: - RegisterRouterProtocol
+
 protocol RegisterRouterProtocol: BaseRouterProtocol, AnyObject {
     var presenter: RegisterPresenterProtocol? { get set }
     
     func registerToPrepareContentScreen()
 }
+
+// MARK: - RegisterBuilderProtocol
 
 protocol RegisterBuilderProtocol: BaseBuilderProtocol, AnyObject { }

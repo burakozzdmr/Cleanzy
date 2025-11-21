@@ -7,9 +7,13 @@
 
 import UIKit
 
+// MARK: - SendCodeRouter
+
 final class SendCodeRouter {
     weak var presenter: SendCodePresenterProtocol?
 }
+
+// MARK: - SendCodeRouterProtocol
 
 extension SendCodeRouter: SendCodeRouterProtocol {
     func sendCodeToLoginScreen() {

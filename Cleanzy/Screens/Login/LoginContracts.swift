@@ -7,9 +7,13 @@
 
 import Foundation
 
+// MARK: - LoginViewProtocol
+
 protocol LoginViewProtocol: BaseViewProtocol, AnyObject {
     var presenter: LoginPresenterProtocol! { get set }
 }
+
+// MARK: - LoginInteractorInputProtocol
 
 protocol LoginInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
     var presenter: LoginInteractorOutputProtocol? { get set }
@@ -17,10 +21,14 @@ protocol LoginInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
     func sendLoginRequest(with email: String, and password: String, as userTypeIndex: Int)
 }
 
+// MARK: - LoginInteractorOutputProtocol
+
 protocol LoginInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject {
     func didLoginSuccess()
     func didLoginFailure()
 }
+
+// MARK: - LoginPresenterProtocol
 
 protocol LoginPresenterProtocol: BasePresenterProtocol, AnyObject {
     var view: LoginViewProtocol? { get set }
@@ -32,6 +40,8 @@ protocol LoginPresenterProtocol: BasePresenterProtocol, AnyObject {
     func didRegisterTapped()
 }
 
+// MARK: - LoginRouterProtocol
+
 protocol LoginRouterProtocol: BaseRouterProtocol, AnyObject {
     var presenter: LoginPresenterProtocol? { get set }
     
@@ -39,5 +49,7 @@ protocol LoginRouterProtocol: BaseRouterProtocol, AnyObject {
     func loginToForgotPasswordScreen()
     func loginToRegisterScreen()
 }
+
+// MARK: - LoginBuilderProtocol
 
 protocol LoginBuilderProtocol: BaseBuilderProtocol, AnyObject { }

@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class ForgotPasswordBuilder: ForgotPasswordBuilderProtocol {
+final class ForgotPasswordBuilder { }
+
+// MARK: - ForgotPasswordBuilderProtocol
+
+extension ForgotPasswordBuilder: ForgotPasswordBuilderProtocol {
     static func createModule() -> UIViewController {
         let viewController = ForgotPasswordViewController()
         let interactor = ForgotPasswordInteractor(authenticationManager: AuthenticationManager())

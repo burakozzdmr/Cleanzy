@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - LoginPresenter
+
 final class LoginPresenter {
     weak var view: LoginViewProtocol?
     var interactor: LoginInteractorInputProtocol?

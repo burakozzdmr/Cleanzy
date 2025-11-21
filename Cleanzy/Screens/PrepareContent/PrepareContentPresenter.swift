@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - PrepareContentPresenter
+
 final class PrepareContentPresenter {
     weak var view: PrepareContentViewProtocol?
     var interactor: PrepareContentInteractorInputProtocol?
@@ -19,6 +21,8 @@ final class PrepareContentPresenter {
     private let updateInterval: TimeInterval = 1.0
 }
 
+// MARK: - PrepareContentPresenterProtocol
+
 extension PrepareContentPresenter: PrepareContentPresenterProtocol {
     func viewDidLoad() {
         startProgressAnimation()
@@ -29,8 +33,12 @@ extension PrepareContentPresenter: PrepareContentPresenterProtocol {
         progressTimer = nil
         router?.prepareContentToHomeScreen()
     }
-    
-    private func startProgressAnimation() {
+}
+
+// MARK: - Privates
+
+private extension PrepareContentPresenter {
+    func startProgressAnimation() {
         currentProgress = 0.0
         view?.updateProgress(currentProgress)
         
@@ -49,5 +57,7 @@ extension PrepareContentPresenter: PrepareContentPresenterProtocol {
         }
     }
 }
+
+// MARK: - PrepareContentInteractorOutputProtocol
 
 extension PrepareContentPresenter: PrepareContentInteractorOutputProtocol { }

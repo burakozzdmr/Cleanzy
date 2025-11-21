@@ -8,6 +8,8 @@
 import Combine
 import Foundation
 
+// MARK: - LoginInteractor
+
 final class LoginInteractor {
     weak var presenter: LoginInteractorOutputProtocol?
     private let authenticationManager: AuthenticationManagerProtocol
