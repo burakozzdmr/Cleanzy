@@ -7,11 +7,15 @@
 
 import Foundation
 
-class SplashPresenter {
-    var view: SplashViewController?
-    var interactor: SplashInteractor?
-    var router: SplashRouter?
+// MARK: - SplashPresenter
+
+final class SplashPresenter {
+    weak var view: SplashViewProtocol?
+    var interactor: SplashInteractorInputProtocol?
+    var router: SplashRouterProtocol?
 }
+
+// MARK: - SplashPresenterProtocol
 
 extension SplashPresenter: SplashPresenterProtocol {
     func viewDidLoad() {
@@ -19,4 +23,8 @@ extension SplashPresenter: SplashPresenterProtocol {
     }
 }
 
-extension SplashPresenter: SplashInteractorInputProtocol { }
+// MARK: - SplashInteractorOutputProtocol
+
+extension SplashPresenter: SplashInteractorOutputProtocol {
+    
+}

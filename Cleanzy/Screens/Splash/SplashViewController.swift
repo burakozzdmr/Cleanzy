@@ -9,25 +9,17 @@ import Lottie
 import SnapKit
 import UIKit
 
-class SplashViewController: UIViewController {
+final class SplashViewController: UIViewController {
     
     // MARK: - Properties
     
-    var presenter: SplashPresenter!
+    var presenter: SplashPresenterProtocol!
     
     private let appLogoImageView: UIImageView = {
         let imageView: UIImageView = .init()
         imageView.image = .init(named: "appLogo")
         imageView.contentMode = .scaleAspectFill
         return imageView
-    }()
-    
-    private let appNameLabel: UILabel = {
-        let label: UILabel = .init()
-        label.text = "Cleanzy"
-        label.textColor = .accent
-        label.font = .systemFont(ofSize: 32, weight: .heavy)
-        return label
     }()
     
     private let loadingAnimationView: LottieAnimationView = {
@@ -45,7 +37,7 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        presenter.viewDidLoad()
+        presenter?.viewDidLoad()
     }
 }
 
@@ -62,7 +54,6 @@ private extension SplashViewController {
     func addViews() {
         view.addSubviews([
             appLogoImageView,
-            appNameLabel,
             loadingAnimationView
         ])
     }
@@ -71,11 +62,6 @@ private extension SplashViewController {
         appLogoImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.height.equalTo(128)
-        }
-        
-        appNameLabel.snp.makeConstraints {
-            $0.top.equalTo(appLogoImageView.snp.bottom).offset(16)
-            $0.centerX.equalToSuperview()
         }
         
         loadingAnimationView.snp.makeConstraints {

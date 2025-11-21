@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  Cleanzy
 //
 //  Created by Burak Özdemir on 8.11.2025.
@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-final class LoginViewController: UIViewController {
-
+final class RegisterViewController: UIViewController {
+    
     // MARK: - Properties
     
-    var presenter: LoginPresenterProtocol!
+    var presenter: RegisterPresenterProtocol!
     
     private let appLogoImageView: UIImageView = {
         let imageView: UIImageView = .init()
@@ -21,9 +21,9 @@ final class LoginViewController: UIViewController {
         return imageView
     }()
     
-    private let welcomeLabel: UILabel = {
+    private let registerLabel: UILabel = {
         let label: UILabel = .init()
-        label.text = "Hoş Geldiniz"
+        label.text = "Kayıt Ol"
         label.textColor = .black
         label.font = .systemFont(ofSize: 32, weight: .bold)
         return label
@@ -50,18 +50,27 @@ final class LoginViewController: UIViewController {
         return segmentedControl
     }()
     
-    private lazy var emailTextField: UITextField = {
+    private lazy var nameTextField: AuthenticationTextField = {
         let textField = AuthenticationTextField(
-            placeholder: "E-posta",
+            placeholder: "Adınızı ve soyadınızı girin",
+            leftIcon: "person.text.rectangle"
+        )
+        textField.delegate = self
+        return textField
+    }()
+    
+    private lazy var emailTextField: AuthenticationTextField = {
+        let textField = AuthenticationTextField(
+            placeholder: "E-postanızı girin",
             leftIcon: "envelope.fill"
         )
         textField.delegate = self
         return textField
     }()
     
-    private lazy var passwordTextField: UITextField = {
+    private lazy var passwordTextField: AuthenticationTextField = {
         let textField = AuthenticationTextField(
-            placeholder: "Parola",
+            placeholder: "Şifrenizi girin",
             isSecure: true,
             leftIcon: "lock.fill",
             hasPasswordToggle: true
@@ -70,51 +79,27 @@ final class LoginViewController: UIViewController {
         return textField
     }()
     
-    private lazy var forgotPasswordLabel: UIButton = {
-        let button: UIButton = .init()
-        button.setTitle("Şifremi Unuttum", for: .normal)
-        button.setTitleColor(.accent, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
-        button.addTarget(self, action: #selector(forgotPasswordTapped), for: .touchUpInside)
-        return button
+    private lazy var confirmPasswordTextField: AuthenticationTextField = {
+        let textField = AuthenticationTextField(
+            placeholder: "Şifrenizi tekrar girin",
+            isSecure: true,
+            leftIcon: "lock.fill",
+            hasPasswordToggle: true
+        )
+        textField.delegate = self
+        return textField
     }()
     
-    private lazy var loginButton: UIButton = {
+    private lazy var registerButton: UIButton = {
         let button: UIButton = .init()
-        button.setTitle("Giriş Yap", for: .normal)
+        button.setTitle("Kayıt Ol", for: .normal)
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = .systemFont(ofSize: 24, weight: .semibold)
         button.backgroundColor = .accent
         button.clipsToBounds = true
         button.layer.cornerRadius = 12
-        button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
         return button
-    }()
-    
-    private let dontHaveAccountLabel: UILabel = {
-        let label: UILabel = .init()
-        label.text = "Hesabınız yok mu?"
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
-        return label
-    }()
-    
-    private lazy var joinUsButton: UIButton = {
-        let button: UIButton = .init()
-        button.setTitle("Aramıza Katıl", for: .normal)
-        button.setTitleColor(.accent, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.addTarget(self, action: #selector(joinUsTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private let bottomStackView: UIStackView = {
-        let stackView: UIStackView = .init()
-        stackView.axis = .horizontal
-        stackView.spacing = 4
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        return stackView
     }()
     
     private let loadingView: AuthenticationLoadingView = .init()
@@ -123,14 +108,14 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
     }
 }
 
 // MARK: - Privates
 
-private extension LoginViewController {
+private extension RegisterViewController {
     func setupUI() {
         addViews()
         configureLayout()
@@ -147,18 +132,14 @@ private extension LoginViewController {
     func addViews() {
         view.addSubviews([
             appLogoImageView,
-            welcomeLabel,
+            registerLabel,
             userTypeSegmentedControl,
+            nameTextField,
             emailTextField,
             passwordTextField,
-            forgotPasswordLabel,
-            loginButton,
-            dontHaveAccountLabel,
-            joinUsButton,
-            bottomStackView
+            confirmPasswordTextField,
+            registerButton
         ])
-        bottomStackView.addArrangedSubview(dontHaveAccountLabel)
-        bottomStackView.addArrangedSubview(joinUsButton)
     }
     
     func configureLayout() {
@@ -168,20 +149,27 @@ private extension LoginViewController {
             $0.width.height.equalTo(128)
         }
         
-        welcomeLabel.snp.makeConstraints {
-            $0.top.equalTo(appLogoImageView.snp.bottom).offset(32)
+        registerLabel.snp.makeConstraints {
+            $0.top.equalTo(appLogoImageView.snp.bottom).offset(24)
             $0.centerX.equalToSuperview()
         }
         
         userTypeSegmentedControl.snp.makeConstraints {
-            $0.top.equalTo(welcomeLabel.snp.bottom).offset(32)
+            $0.top.equalTo(registerLabel.snp.bottom).offset(24)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(320)
             $0.height.equalTo(48)
         }
         
+        nameTextField.snp.makeConstraints {
+            $0.top.equalTo(userTypeSegmentedControl.snp.bottom).offset(32)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(360)
+            $0.height.equalTo(56)
+        }
+        
         emailTextField.snp.makeConstraints {
-            $0.top.equalTo(userTypeSegmentedControl.snp.bottom).offset(24)
+            $0.top.equalTo(nameTextField.snp.bottom).offset(24)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(360)
             $0.height.equalTo(56)
@@ -194,40 +182,46 @@ private extension LoginViewController {
             $0.height.equalTo(56)
         }
         
-        forgotPasswordLabel.snp.makeConstraints {
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(8)
-            $0.trailing.equalTo(passwordTextField.snp.trailing)
+        confirmPasswordTextField.snp.makeConstraints {
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(24)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(360)
+            $0.height.equalTo(56)
         }
         
-        loginButton.snp.makeConstraints {
-            $0.top.equalTo(forgotPasswordLabel.snp.bottom).offset(56)
+        registerButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(24)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(320)
             $0.height.equalTo(56)
         }
-        
-        bottomStackView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
-        }
+    }
+    
+    func validatePasswords() -> Bool {
+        let password = passwordTextField.text ?? ""
+        let confirmPassword = confirmPasswordTextField.text ?? ""
+        return password == confirmPassword && !password.isEmpty
     }
 }
 
 // MARK: - Objective-C Methods
 
-@objc private extension LoginViewController {
-    func loginTapped() {
+@objc private extension RegisterViewController {
+    func registerTapped() {
+        guard validatePasswords() else {
+            AlertManager.shared.showAlert(
+                with: AlertModel(
+                    title: "HATA",
+                    message: "Şifreler eşleşmiyor."
+                ),
+                from: self
+            )
+            return
+        }
+        
         guard let emailText = emailTextField.text,
               let passwordText = passwordTextField.text else { return }
-        presenter.didLoginTapped(with: emailText, and: passwordText, as: userTypeSegmentedControl.selectedSegmentIndex)
-    }
-    
-    func forgotPasswordTapped() {
-        presenter.didForgotPasswordTapped()
-    }
-    
-    func joinUsTapped() {
-        presenter.didRegisterTapped()
+        presenter.didRegisterTapped(with: emailText, and: passwordText, as: userTypeSegmentedControl.selectedSegmentIndex)
     }
     
     func dismissKeyboard() {
@@ -237,16 +231,16 @@ private extension LoginViewController {
 
 // MARK: - UITextFieldDelegate
 
-extension LoginViewController: UITextFieldDelegate {
+extension RegisterViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 }
 
-// MARK: - LoginViewProtocol
+// MARK: - RegisterViewProtocol
 
-extension LoginViewController: LoginViewProtocol {
+extension RegisterViewController: RegisterViewProtocol {
     func showLoading() {
         view.addSubview(loadingView)
         loadingView.snp.makeConstraints {
@@ -262,7 +256,7 @@ extension LoginViewController: LoginViewProtocol {
         AlertManager.shared.showAlert(
             with: AlertModel(
                 title: alertModel.title,
-                message: alertModel.message
+                message: alertModel.message,
             ),
             from: self
         )
@@ -270,5 +264,5 @@ extension LoginViewController: LoginViewProtocol {
 }
 
 #Preview {
-    LoginViewController()
+    RegisterViewController()
 }

@@ -7,7 +7,11 @@
 
 import UIKit
 
-class SplashBuilder: SplashBuilderProtocol {
+final class SplashBuilder { }
+
+// MARK: - SplashBuilderProtocol
+
+extension SplashBuilder: SplashBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = SplashViewController()
         let presenter = SplashPresenter()
@@ -19,7 +23,7 @@ class SplashBuilder: SplashBuilderProtocol {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        router.view = view
+        router.presenter = presenter
         
         return view
     }

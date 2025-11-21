@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,20 +22,12 @@
                                     <constraint firstAttribute="width" constant="128" id="G5w-QO-dal"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cleanzy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9Y-fF-gcS">
-                                <rect key="frame" x="133.66666666666666" y="506" width="125.99999999999997" height="39"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
-                                <color key="textColor" name="AccentColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="e9Y-fF-gcS" firstAttribute="top" secondItem="Kli-IS-zWI" secondAttribute="bottom" constant="16" id="VCF-XO-7Lq"/>
                             <constraint firstItem="Kli-IS-zWI" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="dhO-eR-SP1"/>
                             <constraint firstItem="Kli-IS-zWI" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="gSO-7H-iFg"/>
-                            <constraint firstItem="e9Y-fF-gcS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="p6f-98-J2y"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -47,8 +38,5 @@
     </scenes>
     <resources>
         <image name="appLogo" width="1024" height="1024"/>
-        <namedColor name="AccentColor">
-            <color red="0.16862745098039217" green="0.42352941176470588" blue="0.69019607843137254" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
     </resources>
 </document>
