@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-class RegisterInteractor {
-    weak var presenter: RegisterPresenter?
+final class RegisterInteractor {
+    weak var presenter: RegisterInteractorOutputProtocol?
     private let authenticationManager: AuthenticationManagerProtocol
     private var cancellables: Set<AnyCancellable> = .init()
     

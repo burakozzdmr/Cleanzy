@@ -9,11 +9,11 @@ import Lottie
 import SnapKit
 import UIKit
 
-class SplashViewController: UIViewController {
+final class SplashViewController: UIViewController {
     
     // MARK: - Properties
     
-    var presenter: SplashPresenter!
+    var presenter: SplashPresenterProtocol!
     
     private let appLogoImageView: UIImageView = {
         let imageView: UIImageView = .init()
@@ -37,7 +37,7 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        presenter.viewDidLoad()
+        presenter?.viewDidLoad()
     }
 }
 

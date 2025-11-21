@@ -20,7 +20,7 @@ protocol AuthenticationManagerProtocol: AnyObject {
 
 // MARK: - AuthenticationManager
 
-class AuthenticationManager {
+final class AuthenticationManager {
     private let firebaseAuthentication = Auth.auth()
     private let firebaseFirestore = Firestore.firestore()
     
@@ -116,7 +116,7 @@ extension AuthenticationManager: AuthenticationManagerProtocol {
     }
 }
 
-// MARK: - Helpers
+// MARK: - Privates
 
 private extension AuthenticationManager {
     func fetchUserFromFirestore(for userID: String) -> AnyPublisher<UserModel, AuthenticationError> {

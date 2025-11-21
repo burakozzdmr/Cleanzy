@@ -7,8 +7,8 @@
 
 import UIKit
 
-class LoginRouter {
-    weak var view: LoginViewController?
+final class LoginRouter {
+    weak var presenter: LoginPresenterProtocol?
 }
 
 // MARK: - LoginRouterProtocol
@@ -19,10 +19,12 @@ extension LoginRouter: LoginRouterProtocol {
     }
     
     func loginToForgotPasswordScreen() {
-        self.push(currentViewController: view ?? .init(), targetViewController: ForgotPasswordBuilder.createModule(), animated: true)
+        guard let view = presenter?.view else { return }
+        self.push(currentViewController: view, targetViewController: ForgotPasswordBuilder.createModule(), animated: true)
     }
     
     func loginToRegisterScreen() {
-        self.push(currentViewController: view ?? .init(), targetViewController: RegisterBuilder.createModule(), animated: true)
+        guard let view = presenter?.view else { return }
+        self.push(currentViewController: view, targetViewController: RegisterBuilder.createModule(), animated: true)
     }
 }

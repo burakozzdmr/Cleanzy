@@ -7,12 +7,13 @@
 
 import UIKit
 
-class SendCodeRouter {
-    weak var view: SendCodeViewController?
+final class SendCodeRouter {
+    weak var presenter: SendCodePresenterProtocol?
 }
 
 extension SendCodeRouter: SendCodeRouterProtocol {
     func sendCodeToLoginScreen() {
-        self.popToRoot(view ?? .init(), animated: true)
+        guard let view = presenter?.view else { return }
+        self.popToRoot(view, animated: true)
     }
 }

@@ -7,8 +7,8 @@
 
 import Foundation
 
-class SendCodeInteractor {
-    weak var presenter: SendCodePresenter?
+final class SendCodeInteractor {
+    weak var presenter: SendCodeInteractorOutputProtocol?
 }
 
 extension SendCodeInteractor: SendCodeInteractorInputProtocol { }

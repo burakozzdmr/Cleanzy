@@ -7,8 +7,8 @@
 
 import Foundation
 
-class SplashInteractor {
-    weak var presenter: SplashPresenter?
+final class SplashInteractor {
+    weak var presenter: SplashInteractorOutputProtocol?
 }
 
 extension SplashInteractor: SplashInteractorInputProtocol { }

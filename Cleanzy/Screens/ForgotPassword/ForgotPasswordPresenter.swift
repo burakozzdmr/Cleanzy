@@ -7,10 +7,10 @@
 
 import Foundation
 
-class ForgotPasswordPresenter {
-    weak var view: ForgotPasswordViewController?
-    var interactor: ForgotPasswordInteractor?
-    var router: ForgotPasswordRouter?
+final class ForgotPasswordPresenter {
+    weak var view: ForgotPasswordViewProtocol?
+    var interactor: ForgotPasswordInteractorInputProtocol?
+    var router: ForgotPasswordRouterProtocol?
 }
 
 extension ForgotPasswordPresenter: ForgotPasswordPresenterProtocol {
@@ -26,7 +26,12 @@ extension ForgotPasswordPresenter: ForgotPasswordPresenterProtocol {
     
     func didSendPasswordFailure(with errorMessage: String) {
         view?.hideLoading()
-        view?.showAlert(with: errorMessage)
+        view?.showAlert(
+            with: .init(
+                title: "HATA",
+                message: "\(errorMessage)"
+            )
+        )
     }
 }
 

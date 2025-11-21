@@ -7,8 +7,8 @@
 
 import Foundation
 
-class PrepareContentRouter {
-    weak var view: PrepareContentViewController?
+final class PrepareContentRouter {
+    weak var presenter: PrepareContentPresenterProtocol?
 }
 
 extension PrepareContentRouter: PrepareContentRouterProtocol {

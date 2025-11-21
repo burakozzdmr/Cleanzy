@@ -7,10 +7,10 @@
 
 import Foundation
 
-class SplashPresenter {
-    weak var view: SplashViewController?
-    var interactor: SplashInteractor?
-    var router: SplashRouter?
+final class SplashPresenter {
+    weak var view: SplashViewProtocol?
+    var interactor: SplashInteractorInputProtocol?
+    var router: SplashRouterProtocol?
 }
 
 extension SplashPresenter: SplashPresenterProtocol {

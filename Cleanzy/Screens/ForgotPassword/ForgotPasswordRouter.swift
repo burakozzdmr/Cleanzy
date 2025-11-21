@@ -7,12 +7,13 @@
 
 import UIKit
 
-class ForgotPasswordRouter {
-    weak var view: ForgotPasswordViewController?
+final class ForgotPasswordRouter {
+    weak var presenter: ForgotPasswordPresenterProtocol?
 }
 
 extension ForgotPasswordRouter: ForgotPasswordRouterProtocol {
     func forgotPasswordToSendCodeScreen() {
-        self.push(currentViewController: view ?? .init(), targetViewController: SendCodeBuilder.createModule(), animated: true)
+        guard let view = presenter?.view else { return }
+        self.push(currentViewController: view, targetViewController: SendCodeBuilder.createModule(), animated: true)
     }
 }

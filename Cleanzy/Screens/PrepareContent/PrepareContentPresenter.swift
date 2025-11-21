@@ -7,10 +7,10 @@
 
 import Foundation
 
-class PrepareContentPresenter {
-    weak var view: PrepareContentViewController?
-    var interactor: PrepareContentInteractor?
-    var router: PrepareContentRouter?
+final class PrepareContentPresenter {
+    weak var view: PrepareContentViewProtocol?
+    var interactor: PrepareContentInteractorInputProtocol?
+    var router: PrepareContentRouterProtocol?
     
     private var progressTimer: Timer?
     private var currentProgress: Float = 0.0
@@ -21,7 +21,7 @@ class PrepareContentPresenter {
 
 extension PrepareContentPresenter: PrepareContentPresenterProtocol {
     func viewDidLoad() {
-        didFinishPreparedContent()
+        startProgressAnimation()
     }
     
     func didFinishPreparedContent() {

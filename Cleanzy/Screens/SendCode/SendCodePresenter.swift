@@ -7,10 +7,10 @@
 
 import Foundation
 
-class SendCodePresenter {
-    weak var view: SendCodeViewController?
-    var interactor: SendCodeInteractor?
-    var router: SendCodeRouter?
+final class SendCodePresenter {
+    weak var view: SendCodeViewProtocol?
+    var interactor: SendCodeInteractorInputProtocol?
+    var router: SendCodeRouterProtocol?
 }
 
 extension SendCodePresenter: SendCodePresenterProtocol {

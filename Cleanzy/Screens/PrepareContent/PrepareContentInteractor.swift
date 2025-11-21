@@ -7,8 +7,8 @@
 
 import Foundation
 
-class PrepareContentInteractor {
-    weak var presenter: PrepareContentPresenter?
+final class PrepareContentInteractor {
+    weak var presenter: PrepareContentInteractorOutputProtocol?
 }
 
 extension PrepareContentInteractor: PrepareContentInteractorInputProtocol { }

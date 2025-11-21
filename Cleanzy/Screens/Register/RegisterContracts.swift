@@ -8,11 +8,11 @@
 import Foundation
 
 protocol RegisterViewProtocol: BaseViewProtocol, AnyObject {
-    var presenter: RegisterPresenter! { get set }
+    var presenter: RegisterPresenterProtocol! { get set }
 }
 
 protocol RegisterInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
-    var presenter: RegisterPresenter? { get set }
+    var presenter: RegisterInteractorOutputProtocol? { get set }
     
     func sendRegisterRequest(with email: String, and password: String, as userTypeIndex: Int)
 }
@@ -23,15 +23,15 @@ protocol RegisterInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObje
 }
 
 protocol RegisterPresenterProtocol: BasePresenterProtocol, AnyObject {
-    var view: RegisterViewController? { get set }
-    var interactor: RegisterInteractor? { get set }
-    var router: RegisterRouter? { get set }
+    var view: RegisterViewProtocol? { get set }
+    var interactor: RegisterInteractorInputProtocol? { get set }
+    var router: RegisterRouterProtocol? { get set }
     
     func didRegisterTapped(with email: String, and password: String, as userTypeIndex: Int)
 }
 
 protocol RegisterRouterProtocol: BaseRouterProtocol, AnyObject {
-    var view: RegisterViewController? { get set }
+    var presenter: RegisterPresenterProtocol? { get set }
     
     func registerToPrepareContentScreen()
 }

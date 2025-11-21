@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SendCodeBuilder: SendCodeBuilderProtocol {
+final class SendCodeBuilder: SendCodeBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = SendCodeViewController()
         let interactor = SendCodeInteractor()
@@ -19,7 +19,7 @@ class SendCodeBuilder: SendCodeBuilderProtocol {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        router.view = view
+        router.presenter = presenter
         
         return view
     }

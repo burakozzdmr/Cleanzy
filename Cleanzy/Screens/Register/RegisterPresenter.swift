@@ -7,10 +7,10 @@
 
 import Foundation
 
-class RegisterPresenter {
-    weak var view: RegisterViewController?
-    var interactor: RegisterInteractor?
-    var router: RegisterRouter?
+final class RegisterPresenter {
+    weak var view: RegisterViewProtocol?
+    var interactor: RegisterInteractorInputProtocol?
+    var router: RegisterRouterProtocol?
 }
 
 // MARK: - RegisterPresenterProtocol
@@ -32,6 +32,11 @@ extension RegisterPresenter: RegisterInteractorOutputProtocol {
     
     func didRegisterFailure() {
         view?.hideLoading()
-        view?.showAlert()
+        view?.showAlert(
+            with: .init(
+                title: "HATA",
+                message: "Register Failed"
+            )
+        )
     }
 }

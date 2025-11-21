@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-class ForgotPasswordInteractor {
-    weak var presenter: ForgotPasswordPresenter?
+final class ForgotPasswordInteractor {
+    weak var presenter: ForgotPasswordInteractorOutputProtocol?
     private let authenticationManager: AuthenticationManagerProtocol
     private var cancellables: Set<AnyCancellable> = .init()
     

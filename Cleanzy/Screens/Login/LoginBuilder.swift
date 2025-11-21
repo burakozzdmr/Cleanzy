@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginBuilder: LoginBuilderProtocol {
+final class LoginBuilder: LoginBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = LoginViewController()
         let presenter = LoginPresenter()
@@ -19,7 +19,7 @@ class LoginBuilder: LoginBuilderProtocol {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        router.view = view
+        router.presenter = presenter
         
         return view
     }

@@ -7,8 +7,8 @@
 
 import UIKit
 
-class SplashRouter {
-    weak var view: SplashViewController?
+final class SplashRouter {
+    weak var presenter: SplashPresenterProtocol?
 }
 
 extension SplashRouter: SplashRouterProtocol {

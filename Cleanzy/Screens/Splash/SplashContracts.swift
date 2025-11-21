@@ -8,23 +8,23 @@
 import UIKit
 
 protocol SplashViewProtocol: BaseViewProtocol, AnyObject {
-    var presenter: SplashPresenter! { get set }
+    var presenter: SplashPresenterProtocol! { get set }
 }
 
 protocol SplashInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
-    var presenter: SplashPresenter? { get set }
+    var presenter: SplashInteractorOutputProtocol? { get set }
 }
 
 protocol SplashInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject { }
 
 protocol SplashPresenterProtocol: BasePresenterProtocol, AnyObject {
-    var view: SplashViewController? { get set }
-    var interactor: SplashInteractor? { get set }
-    var router: SplashRouter? { get set }
+    var view: SplashViewProtocol? { get set }
+    var interactor: SplashInteractorInputProtocol? { get set }
+    var router: SplashRouterProtocol? { get set }
 }
 
 protocol SplashRouterProtocol: BaseRouterProtocol, AnyObject {
-    var view: SplashViewController? { get set }
+    var presenter: SplashPresenterProtocol? { get set }
     func splashToLogin()
 }
 

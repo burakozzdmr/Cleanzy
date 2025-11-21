@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegisterBuilder: RegisterBuilderProtocol {
+final class RegisterBuilder: RegisterBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = RegisterViewController()
         let presenter = RegisterPresenter()
@@ -19,7 +19,7 @@ class RegisterBuilder: RegisterBuilderProtocol {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        router.view = view
+        router.presenter = presenter
         
         return view
     }

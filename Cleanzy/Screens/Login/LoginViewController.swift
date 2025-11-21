@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
 
     // MARK: - Properties
     
-    var presenter: LoginPresenter!
+    var presenter: LoginPresenterProtocol!
     
     private let appLogoImageView: UIImageView = {
         let imageView: UIImageView = .init()
@@ -258,11 +258,11 @@ extension LoginViewController: LoginViewProtocol {
         loadingView.removeFromSuperview()
     }
     
-    func showAlert() {
+    func showAlert(with alertModel: AlertModel) {
         AlertManager.shared.showAlert(
             with: AlertModel(
-                title: "HATA",
-                message: "Kullanıcı adı veya şifre hatalı"
+                title: alertModel.title,
+                message: alertModel.message
             ),
             from: self
         )

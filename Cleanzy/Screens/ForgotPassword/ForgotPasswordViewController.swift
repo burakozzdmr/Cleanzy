@@ -8,11 +8,11 @@
 import SnapKit
 import UIKit
 
-class ForgotPasswordViewController: UIViewController {
+final class ForgotPasswordViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: Properties
     
-    var presenter: ForgotPasswordPresenter!
+    var presenter: ForgotPasswordPresenterProtocol!
     
     private let codeDescriptionLabel: UILabel = {
         let label: UILabel = .init()
@@ -147,11 +147,11 @@ extension ForgotPasswordViewController: ForgotPasswordViewProtocol {
         loadingView.removeFromSuperview()
     }
     
-    func showAlert(with errorMessage: String) {
+    func showAlert(with alertModel: AlertModel) {
         AlertManager.shared.showAlert(
             with: .init(
-                title: "HATA",
-                message: errorMessage
+                title: alertModel.title,
+                message: alertModel.message
             ),
             from: self
         )

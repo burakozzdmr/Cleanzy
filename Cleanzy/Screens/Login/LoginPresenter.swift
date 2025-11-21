@@ -7,10 +7,10 @@
 
 import Foundation
 
-class LoginPresenter {
-    weak var view: LoginViewController?
-    var interactor: LoginInteractor?
-    var router: LoginRouter?
+final class LoginPresenter {
+    weak var view: LoginViewProtocol?
+    var interactor: LoginInteractorInputProtocol?
+    var router: LoginRouterProtocol?
 }
 
 // MARK: - LoginPresenterProtocol
@@ -40,6 +40,11 @@ extension LoginPresenter: LoginInteractorOutputProtocol {
     
     func didLoginFailure() {
         view?.hideLoading()
-        view?.showAlert()
+        view?.showAlert(
+            with: .init(
+                title: "HATA",
+                message: "Login Failed"
+            )
+        )
     }
 }

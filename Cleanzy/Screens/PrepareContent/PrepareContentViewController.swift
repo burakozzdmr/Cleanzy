@@ -9,11 +9,11 @@ import Lottie
 import SnapKit
 import UIKit
 
-class PrepareContentViewController: UIViewController {
+final class PrepareContentViewController: UIViewController {
     
     // MARK: - Properties
     
-    var presenter: PrepareContentPresenter!
+    var presenter: PrepareContentPresenterProtocol!
     
     private let prepareContentAnimationView: LottieAnimationView = {
         let lottieView: LottieAnimationView = .init(name: "PrepareContentCleanerAnimation")
@@ -49,7 +49,7 @@ class PrepareContentViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        
+        presenter.viewDidLoad()
     }
 }
 
@@ -61,6 +61,7 @@ private extension PrepareContentViewController {
         configureLayout()
         
         view.backgroundColor = .white
+        navigationItem.hidesBackButton = true
     }
     
     func addViews() {
@@ -73,9 +74,9 @@ private extension PrepareContentViewController {
     
     func configureLayout() {
         prepareContentAnimationView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(128)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(128)
             $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(256)
+            $0.width.height.equalTo(240)
         }
         
         loadingLabel.snp.makeConstraints {
@@ -97,8 +98,4 @@ extension PrepareContentViewController: PrepareContentViewProtocol {
     func updateProgress(_ progress: Float) {
         loadingProgressView.setProgress(progress, animated: true)
     }
-}
-
-#Preview {
-    PrepareContentViewController()
 }

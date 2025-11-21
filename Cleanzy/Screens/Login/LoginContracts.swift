@@ -8,11 +8,11 @@
 import Foundation
 
 protocol LoginViewProtocol: BaseViewProtocol, AnyObject {
-    var presenter: LoginPresenter! { get set }
+    var presenter: LoginPresenterProtocol! { get set }
 }
 
 protocol LoginInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
-    var presenter: LoginPresenter? { get set }
+    var presenter: LoginInteractorOutputProtocol? { get set }
     
     func sendLoginRequest(with email: String, and password: String, as userTypeIndex: Int)
 }
@@ -23,9 +23,9 @@ protocol LoginInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject 
 }
 
 protocol LoginPresenterProtocol: BasePresenterProtocol, AnyObject {
-    var view: LoginViewController? { get set }
-    var interactor: LoginInteractor? { get set }
-    var router: LoginRouter? { get set }
+    var view: LoginViewProtocol? { get set }
+    var interactor: LoginInteractorInputProtocol? { get set }
+    var router: LoginRouterProtocol? { get set }
     
     func didLoginTapped(with email: String, and password: String, as userTypeIndex: Int)
     func didForgotPasswordTapped()
@@ -33,7 +33,7 @@ protocol LoginPresenterProtocol: BasePresenterProtocol, AnyObject {
 }
 
 protocol LoginRouterProtocol: BaseRouterProtocol, AnyObject {
-    var view: LoginViewController? { get set }
+    var presenter: LoginPresenterProtocol? { get set }
     
     func loginToHomeScreen()
     func loginToForgotPasswordScreen()

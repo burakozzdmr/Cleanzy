@@ -8,25 +8,25 @@
 import Foundation
 
 protocol SendCodeViewProtocol: BaseViewProtocol, AnyObject {
-    var presenter: SendCodePresenter! { get set }
+    var presenter: SendCodePresenterProtocol! { get set }
 }
 
 protocol SendCodeInteractorInputProtocol: BaseInteractorInputProtocol, AnyObject {
-    var presenter: SendCodePresenter? { get set }
+    var presenter: SendCodeInteractorOutputProtocol? { get set }
 }
 
 protocol SendCodeInteractorOutputProtocol: BaseInteractorOutputProtocol, AnyObject { }
 
 protocol SendCodePresenterProtocol: BasePresenterProtocol, AnyObject {
-    var view: SendCodeViewController? { get set }
-    var interactor: SendCodeInteractor? { get set }
-    var router: SendCodeRouter? { get set }
+    var view: SendCodeViewProtocol? { get set }
+    var interactor: SendCodeInteractorInputProtocol? { get set }
+    var router: SendCodeRouterProtocol? { get set }
     
     func didLoginTapped()
 }
 
 protocol SendCodeRouterProtocol: BaseRouterProtocol, AnyObject {
-    var view: SendCodeViewController? { get set }
+    var presenter: SendCodePresenterProtocol? { get set }
     
     func sendCodeToLoginScreen()
 }

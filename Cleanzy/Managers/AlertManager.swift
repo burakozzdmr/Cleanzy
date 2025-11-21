@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - AlertManager
+
 final class AlertManager {
     static let shared = AlertManager()
     

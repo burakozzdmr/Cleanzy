@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-class LoginInteractor {
-    weak var presenter: LoginPresenter?
+final class LoginInteractor {
+    weak var presenter: LoginInteractorOutputProtocol?
     private let authenticationManager: AuthenticationManagerProtocol
     private var cancellables: Set<AnyCancellable> = .init()
     

@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
     
     // MARK: - Properties
     
-    var presenter: RegisterPresenter!
+    var presenter: RegisterPresenterProtocol!
     
     private let appLogoImageView: UIImageView = {
         let imageView: UIImageView = .init()
@@ -252,14 +252,11 @@ extension RegisterViewController: RegisterViewProtocol {
         loadingView.removeFromSuperview()
     }
     
-    func showAlert() {
+    func showAlert(with alertModel: AlertModel) {
         AlertManager.shared.showAlert(
             with: AlertModel(
-                title: "HATA",
-                message: "Kayıt işlemi başarısız",
-                actions: [
-                    UIAlertAction(title: "Tamam", style: .default)
-                ]
+                title: alertModel.title,
+                message: alertModel.message,
             ),
             from: self
         )

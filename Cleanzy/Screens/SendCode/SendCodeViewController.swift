@@ -9,11 +9,11 @@ import Lottie
 import SnapKit
 import UIKit
 
-class SendCodeViewController: UIViewController {
+final class SendCodeViewController: UIViewController {
     
     // MARK: - Properties
     
-    var presenter: SendCodePresenter!
+    var presenter: SendCodePresenterProtocol!
     
     private let checkmarkAnimationView: LottieAnimationView = {
         let animationView = LottieAnimationView(name: "CheckmarkAnimation")
@@ -79,6 +79,7 @@ private extension SendCodeViewController {
         configureLayout()
         
         view.backgroundColor = .white
+        navigationItem.hidesBackButton = true
     }
     
     func addViews() {

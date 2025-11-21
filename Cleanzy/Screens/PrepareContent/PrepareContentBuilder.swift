@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PrepareContentBuilder: PrepareContentBuilderProtocol {
+final class PrepareContentBuilder: PrepareContentBuilderProtocol {
     static func createModule() -> UIViewController {
         let view = PrepareContentViewController()
         let presenter = PrepareContentPresenter()
@@ -19,7 +19,7 @@ class PrepareContentBuilder: PrepareContentBuilderProtocol {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        router.view = view
+        router.presenter = presenter
         
         return view
     }
