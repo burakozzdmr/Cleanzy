@@ -23,7 +23,7 @@ private extension TabBarController {
         let homepageVC = createNavigationController(
             with: "Anasayfa",
             and: "house.fill",
-            from: .init()
+            from: HomepageBuilder.createModule()
         )
         
         self.setViewControllers([homepageVC], animated: false)
